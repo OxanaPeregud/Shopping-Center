@@ -3,23 +3,23 @@ function printError(elemId, hintMsg) {
 }
 
 function validateForm() {
-    var name = document.storeForm.name.value;
-    var description = document.storeForm.description.value;
-    var discount = document.storeForm.discount.value;
-    var discountStartDate = document.storeForm.discountStartDate.value;
-    var discountEndDate = document.storeForm.discountEndDate.value;
-    var location = document.storeForm.location.value;
-    var email = document.storeForm.email.value;
-    var mobile = document.storeForm.mobile.value;
+    var name = document.shopForm.name.value;
+    var description = document.shopForm.description.value;
+    var discount = document.shopForm.discount.value;
+    var discountStartDate = document.shopForm.discountStartDate.value;
+    var discountEndDate = document.shopForm.discountEndDate.value;
+    var location = document.shopForm.location.value;
+    var email = document.shopForm.email.value;
+    var mobile = document.shopForm.mobile.value;
 
     var nameErr = descriptionErr = discountErr = locationErr = emailErr = mobileErr = true;
 
     if (name === "") {
-        printError("nameErr", "Please enter Store name");
+        printError("nameErr", "Please enter Shop name");
     } else {
         var regex1 = /^[a-zA-Z0-9\W\s]+$/;
         if (regex1.test(name) === false) {
-            printError("nameErr", "Please enter a valid Store name");
+            printError("nameErr", "Please enter a valid Shop name");
         } else {
             printError("nameErr", "");
             nameErr = false;
@@ -27,11 +27,11 @@ function validateForm() {
     }
 
     if (description === "") {
-        printError("descriptionErr", "Please enter Store description");
+        printError("descriptionErr", "Please enter Shop description");
     } else {
         var regex2 = /^[a-zA-Z0-9\W\s]+$/;
         if (regex2.test(description) === false) {
-            printError("descriptionErr", "Please enter a valid Store description");
+            printError("descriptionErr", "Please enter a valid Shop description");
         } else {
             printError("descriptionErr", "");
             descriptionErr = false;
@@ -51,11 +51,11 @@ function validateForm() {
     }
 
     if (location === "") {
-        printError("locationErr", "Please enter Store location");
+        printError("locationErr", "Please enter Shop location");
     } else {
         var regex4 = /^[a-zA-Z0-9\W\s]+$/;
         if (regex4.test(location) === false) {
-            printError("locationErr", "Please enter a valid Store location");
+            printError("locationErr", "Please enter a valid Shop location");
         } else {
             printError("locationErr", "");
             locationErr = false;
@@ -63,7 +63,7 @@ function validateForm() {
     }
 
     if (email === "") {
-        printError("emailErr", "Please enter Store email address");
+        printError("emailErr", "Please enter Shop email address");
     } else {
         var regex5 = /^\S+@\S+\.\S+$/;
         if (regex5.test(email) === false) {
@@ -75,7 +75,7 @@ function validateForm() {
     }
 
     if (mobile === "") {
-        printError("mobileErr", "Please enter Store mobile number");
+        printError("mobileErr", "Please enter Shop mobile number");
     } else {
         var regex6 = /^[1-9]\d{11}$/;
         if (regex6.test(mobile) === false) {
@@ -90,12 +90,12 @@ function validateForm() {
         return false;
     } else {
         var dataPreview = "You've entered the following details: \n" +
-            "Store Name: " + name + "\n" +
-            "Store Description: " + description + "\n" +
+            "Shop Name: " + name + "\n" +
+            "Shop Description: " + description + "\n" +
             "Discount: " + discount + "\n" +
             "Discount Start Date: " + discountStartDate + "\n" +
             "Discount End Date: " + discountEndDate + "\n" +
-            "Store Location: " + location + "\n" +
+            "Shop Location: " + location + "\n" +
             "Email Address: " + email + "\n" +
             "Mobile Number: " + mobile + "\n";
         alert(dataPreview);

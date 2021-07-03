@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-    <title>Store Information Form</title>
+    <title>Shop Information Form</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/form-style.css">
     <script src="view/validation.js"></script>
 </head>
@@ -12,49 +12,49 @@
 <body>
 
 <div>
-    <c:if test="${store != null}">
-    <form name="storeForm" onsubmit="return validateForm()"
-          action="${pageContext.request.contextPath}/update-store" method="post">
+    <c:if test="${shop != null}">
+    <form name="shopForm" onsubmit="return validateForm()"
+          action="${pageContext.request.contextPath}/update-shop" method="post">
         </c:if>
 
-        <c:if test="${store == null}">
-        <form name="storeForm" onsubmit="return validateForm()"
-              action="${pageContext.request.contextPath}/insert-store" method="post">
+        <c:if test="${shop == null}">
+        <form name="shopForm" onsubmit="return validateForm()"
+              action="${pageContext.request.contextPath}/insert-shop" method="post">
             </c:if>
 
             <caption>
                 <h2>
-                    <a href="list-stores">List of All Stores</a>
+                    <a href="list-shops">List of All shops</a>
                     <br>
                     <br>
-                    <c:if test="${store != null}">
-                        Edit Store Information
+                    <c:if test="${shop != null}">
+                        Edit Shop Information
                     </c:if>
-                    <c:if test="${store == null}">
-                        Add New Store Information
+                    <c:if test="${shop == null}">
+                        Add New Shop Information
                     </c:if>
                 </h2>
             </caption>
 
-            <c:if test="${store != null}">
-                <input type="hidden" name="id" value="<c:out value='${store.id}' />"/>
+            <c:if test="${shop != null}">
+                <input type="hidden" name="id" value="<c:out value='${shop.id}' />"/>
             </c:if>
 
             <div class="row">
-                <label>Store Name</label>
+                <label>Shop Name</label>
                 <label>
                     <input type="text" name="name" maxlength="255"
-                           value="<c:out value='${store.name}' />"
+                           value="<c:out value='${shop.name}' />"
                     />
                 </label>
                 <div class="error" id="nameErr"></div>
             </div>
 
             <div class="row">
-                <label>Store Description</label>
+                <label>Shop Description</label>
                 <label>
                     <input type="text" name="description" maxlength="255"
-                           value="<c:out value='${store.description}' />"
+                           value="<c:out value='${shop.description}' />"
                     />
                 </label>
                 <div class="error" id="descriptionErr"></div>
@@ -64,7 +64,7 @@
                 <label>Discount</label>
                 <label>
                     <input type="text" name="discount" maxlength="2"
-                           value="<c:out value='${store.discount}' />"
+                           value="<c:out value='${shop.discount}' />"
                     />
                 </label>
                 <div class="error" id="discountErr"></div>
@@ -74,7 +74,7 @@
                 <label>Discount Start Date</label>
                 <label>
                     <input type="date" name="discountStartDate" required pattern="\d{4}-\d{2}-\d{2}"
-                           value="<c:out value='${store.discountStartDate}' />"
+                           value="<c:out value='${shop.discountStartDate}' />"
                     />
                     <span class="validity"></span>
                 </label>
@@ -84,7 +84,7 @@
                 <label>Discount End Date</label>
                 <label>
                     <input type="date" name="discountEndDate" required pattern="\d{4}-\d{2}-\d{2}"
-                           value="<c:out value='${store.discountEndDate}' />"
+                           value="<c:out value='${shop.discountEndDate}' />"
                     />
                     <span class="validity"></span>
                 </label>
@@ -94,7 +94,7 @@
                 <label>Location</label>
                 <label>
                     <input type="text" name="location" maxlength="255"
-                           value="<c:out value='${store.location}' />"
+                           value="<c:out value='${shop.location}' />"
                     />
                 </label>
                 <div class="error" id="locationErr"></div>
@@ -104,7 +104,7 @@
                 <label>Email Address</label>
                 <label>
                     <input type="text" name="email"
-                           value="<c:out value='${store.email}' />"
+                           value="<c:out value='${shop.email}' />"
                     />
                 </label>
                 <div class="error" id="emailErr"></div>
@@ -114,7 +114,7 @@
                 <label>Mobile Number</label>
                 <label>
                     <input type="text" name="mobile" maxlength="12"
-                           value="<c:out value='${store.mobile}' />"
+                           value="<c:out value='${shop.mobile}' />"
                     />
                 </label>
                 <div class="error" id="mobileErr"></div>

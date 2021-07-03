@@ -11,6 +11,6 @@ public class AppServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/list-stores");
+        response.sendRedirect(request.getContextPath() + "/list-shops");
     }
 }

@@ -5,7 +5,7 @@
              version="2.0">
     <persistence-unit name="com.peregud" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>com.peregud.shoppingcenter.model.Store</class>
+        <class>com.peregud.shoppingcenter.model.Shop</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>

@@ -1,16 +1,16 @@
 package com.peregud.shoppingcenter.converter;
 
-import com.peregud.shoppingcenter.model.Store;
+import com.peregud.shoppingcenter.model.Shop;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class StoreConverter implements Converter<Store> {
+public class ShopConverter implements Converter<Shop> {
 
     @Override
-    public Store convert(HttpServletRequest request) {
-        Store.StoreBuilder builder = Store.builder();
+    public Shop convert(HttpServletRequest request) {
+        Shop.ShopBuilder builder = Shop.builder();
         Optional.ofNullable(request.getParameter("id"))
                 .map(Integer::parseInt)
                 .ifPresent(builder::id);
