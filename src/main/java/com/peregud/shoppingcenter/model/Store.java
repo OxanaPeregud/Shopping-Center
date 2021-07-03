@@ -32,7 +32,7 @@ public class Store implements Serializable {
     private String description;
 
     @Column
-    private Double discount;
+    private Integer discount;
 
     @Column(name = "discount_start_date")
     private LocalDate discountStartDate;

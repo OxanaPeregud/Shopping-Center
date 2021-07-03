@@ -17,7 +17,7 @@ public class StoreConverter implements Converter<Store> {
         return builder
                 .name(request.getParameter("name"))
                 .description(request.getParameter("description"))
-                .discount(Double.parseDouble(request.getParameter("discount")))
+                .discount(Integer.parseInt(request.getParameter("discount")))
                 .discountStartDate(LocalDate.parse(request.getParameter("discountStartDate")))
                 .discountEndDate(LocalDate.parse(request.getParameter("discountEndDate")))
                 .location(request.getParameter("location"))
