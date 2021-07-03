@@ -16,6 +16,10 @@
         <a href="new-shop">Add New Shop</a>
         &nbsp;&nbsp;&nbsp;
         <a href="list-shops">List of All Shops</a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="view/search-shop.jsp">Search Shop</a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="view/search-discount.jsp">Search Discount</a>
     </h2>
 </div>
 
