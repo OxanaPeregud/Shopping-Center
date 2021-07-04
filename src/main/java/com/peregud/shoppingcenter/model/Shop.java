@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +14,6 @@ import java.time.LocalDate;
 @Builder
 @Data
 @Entity
-@Indexed(index = "shop")
 @Table(name = "shop")
 public class Shop implements Serializable {
     @Id
@@ -24,11 +21,9 @@ public class Shop implements Serializable {
     private Integer id;
 
     @Column
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     private String name;
 
     @Column
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     private String description;
 
     @Column
