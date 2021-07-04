@@ -16,7 +16,7 @@
             <td>Enter your request:</td>
             <td>
                 <label>
-                    <input type="text" name="clientRequest"/>
+                    <input type="text" name="search"/>
                 </label>
             </td>
         </tr>

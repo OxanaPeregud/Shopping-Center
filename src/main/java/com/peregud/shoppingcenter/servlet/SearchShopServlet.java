@@ -1,6 +1,6 @@
 package com.peregud.shoppingcenter.servlet;
 
-import com.peregud.shoppingcenter.util.SearchUtil;
+import com.peregud.shoppingcenter.util.FullTextSearchUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +20,8 @@ public class SearchShopServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String clientRequest = request.getParameter("clientRequest");
-        List<?> listShops = SearchUtil.shopSearch(clientRequest);
+        String search = request.getParameter("search");
+        List<?> listShops = FullTextSearchUtil.shopSearch(search);
         request.setAttribute("listShops", listShops);
         request.getRequestDispatcher("view/search-shop.jsp").forward(request, response);
     }

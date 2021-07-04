@@ -32,7 +32,6 @@ public class Shop implements Serializable {
     private String description;
 
     @Column
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     private Integer discount;
 
     @Column(name = "discount_start_date")

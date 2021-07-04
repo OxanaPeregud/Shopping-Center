@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @UtilityClass
-public class SearchUtil {
+public class FullTextSearchUtil {
 
-    public List<?> shopSearch(String request) {
+    public List<?> shopSearch(String search) {
         EntityManager entityManager = HibernateUtil.createEntityManager();
         List<List<?>> shops = new ArrayList<>();
         try {
@@ -27,32 +27,7 @@ public class SearchUtil {
             FullTextQuery query = fullTextEntityManager.createFullTextQuery(
                     queryBuilder.keyword().wildcard()
                             .onFields("name", "description")
-                            .matching(request + "*")
-                            .createQuery(),
-                    Shop.class
-            );
-            shops.add(query.getResultList());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            entityManager.close();
-        }
-        return shops;
-    }
-
-    public List<?> discountSearch(int minimumDiscount) {
-        EntityManager entityManager = HibernateUtil.createEntityManager();
-        List<List<?>> shops = new ArrayList<>();
-        try {
-            FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
-            QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory()
-                    .buildQueryBuilder()
-                    .forEntity(Shop.class)
-                    .get();
-            FullTextQuery query = fullTextEntityManager.createFullTextQuery(
-                    queryBuilder.range()
-                            .onField("discount")
-                            .above(minimumDiscount)
+                            .matching(search + "*")
                             .createQuery(),
                     Shop.class
             );
