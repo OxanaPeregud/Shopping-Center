@@ -1,7 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
-<html>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
+
+<html lang="${sessionScope.lang}">
 
 <head>
     <title>Shopping Center</title>
@@ -11,32 +16,34 @@
 <body>
 
 <div>
-    <h1>Shopping Center App</h1>
+    <h1><fmt:message key="label.app"/></h1>
     <h2>
-        <a href="new-shop">Add New Shop</a>
+        <a href="new-shop"><fmt:message key="label.newShop"/></a>
         &nbsp;&nbsp;&nbsp;
-        <a href="list-shops">List of All Shops</a>
+        <a href="list-shops"><fmt:message key="label.allShops"/></a>
         &nbsp;&nbsp;&nbsp;
-        <a href="view/search-shop.jsp">Search Shop</a>
+        <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
         &nbsp;&nbsp;&nbsp;
-        <a href="view/search-discount.jsp">Search Discount</a>
+        <a href="view/search-discount.jsp"><fmt:message key="label.searchDiscount"/></a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="display-shops"><fmt:message key="label.searchActualDiscount"/></a>
     </h2>
 </div>
 
 <div>
     <form action="list-shops" method="post">
         <table>
-            <caption><h2>List of Shops</h2></caption>
+            <caption><h2><fmt:message key="label.allShops"/></h2></caption>
             <tr>
                 <th>ID</th>
-                <th>Shop Name</th>
-                <th>Shop Description</th>
-                <th>Discount</th>
-                <th>Discount Start Date</th>
-                <th>Discount End Date</th>
-                <th>Shop Location</th>
-                <th>Mobile</th>
-                <th>Email</th>
+                <th><fmt:message key="label.shopName"/></th>
+                <th><fmt:message key="label.shopDescription"/></th>
+                <th><fmt:message key="label.discount"/></th>
+                <th><fmt:message key="label.discountStartDate"/></th>
+                <th><fmt:message key="label.discountEndDate"/></th>
+                <th><fmt:message key="label.location"/></th>
+                <th><fmt:message key="label.mobile"/></th>
+                <th><fmt:message key="label.email"/></th>
             </tr>
 
             <c:forEach var="shop" items="${listShops}">
@@ -51,9 +58,10 @@
                     <td><c:out value="${shop.mobile}"/></td>
                     <td><c:out value="${shop.email}"/></td>
                     <td>
-                        <a href="edit-shop?id=<c:out value='${shop.id}' />">Edit</a>
+                        <a href="edit-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.edit"/></a>
                         &nbsp;&nbsp;&nbsp;&nbsp
-                        <label><input type="checkbox" name="deleteShop" value="${shop.id}">Delete</label>
+                        <label><input type="checkbox" name="deleteShop"
+                                      value="${shop.id}"><fmt:message key="label.delete"/></label>
                     </td>
                 </tr>
             </c:forEach>
@@ -66,6 +74,10 @@
 
         </table>
     </form>
+
+    <p>
+        <a href="${pageContext.request.contextPath}/choose-locale"><fmt:message key="label.changeLang"/></a>
+    </p>
 
 </div>
 </body>

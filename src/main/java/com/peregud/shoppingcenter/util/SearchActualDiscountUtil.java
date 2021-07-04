@@ -1,7 +1,7 @@
 package com.peregud.shoppingcenter.util;
 
-import com.peregud.shoppingcenter.transformer.ShopDto;
-import com.peregud.shoppingcenter.transformer.ListResultTransformer;
+import com.peregud.shoppingcenter.dto.ShopDto;
+import com.peregud.shoppingcenter.dto.ListResultTransformer;
 import lombok.experimental.UtilityClass;
 import org.hibernate.query.Query;
 

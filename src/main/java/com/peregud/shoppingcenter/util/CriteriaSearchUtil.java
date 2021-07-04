@@ -2,7 +2,7 @@ package com.peregud.shoppingcenter.util;
 
 import com.peregud.shoppingcenter.model.Shop;
 import com.peregud.shoppingcenter.model.Shop_;
-import com.peregud.shoppingcenter.transformer.ShopDto;
+import com.peregud.shoppingcenter.dto.ShopDto;
 import com.sun.istack.NotNull;
 import lombok.experimental.UtilityClass;
 
@@ -34,9 +34,9 @@ public class CriteriaSearchUtil {
         CriteriaQuery<Shop> criteriaQuery = criteriaBuilder.createQuery(Shop.class);
         Root<Shop> root = criteriaQuery.from(Shop.class);
         Predicate predicate1 = criteriaBuilder
-                .like(criteriaBuilder.upper(root.get(Shop_.name)), "%" + search.toUpperCase() + "%");
+                .like(criteriaBuilder.lower(root.get(Shop_.name)), "%" + search.toLowerCase() + "%");
         Predicate predicate2 = criteriaBuilder
-                .like(criteriaBuilder.upper(root.get(Shop_.description)), "%" + search.toUpperCase() + "%");
+                .like(criteriaBuilder.lower(root.get(Shop_.description)), "%" + search.toLowerCase() + "%");
         criteriaQuery.select(root)
                 .where(criteriaBuilder.or(predicate1, predicate2));
         return getShopList(entityManager, criteriaQuery);
@@ -47,13 +47,13 @@ public class CriteriaSearchUtil {
         TypedQuery<Shop> query = entityManager.createQuery(criteriaQuery);
         List<Shop> resultList = query.getResultList();
         List<ShopDto> shopDtoList = new ArrayList<>();
-        for (Shop shop : resultList) {
+        resultList.forEach(shop -> {
             ShopDto shopDto = new ShopDto();
             shopDto.setName(shop.getName());
             shopDto.setDiscount(shop.getDiscount());
             shopDto.setLocation(shop.getLocation());
             shopDtoList.add(shopDto);
-        }
+        });
         entityManager.close();
         return shopDtoList;
     }

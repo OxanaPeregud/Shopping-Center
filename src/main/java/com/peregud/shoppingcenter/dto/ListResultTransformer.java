@@ -1,4 +1,4 @@
-package com.peregud.shoppingcenter.transformer;
+package com.peregud.shoppingcenter.dto;
 
 import org.hibernate.transform.ResultTransformer;
 
