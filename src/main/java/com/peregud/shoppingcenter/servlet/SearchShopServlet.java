@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 
 @WebServlet("/search-shop")
 public class SearchShopServlet extends HttpServlet {
@@ -21,8 +21,9 @@ public class SearchShopServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String search = request.getParameter("search");
-        String listShops = Arrays.toString(CriteriaSearchUtil.shopKeywords(search));
+        List<?> listShops = CriteriaSearchUtil.shopKeywords(search);
         request.setAttribute("listShops", listShops);
-        request.getRequestDispatcher("view/search-shop.jsp").forward(request, response);
+        request.getRequestDispatcher("view/search-shop.jsp").include(request, response);
+        request.getRequestDispatcher("view/display-shops.jsp").include(request, response);
     }
 }

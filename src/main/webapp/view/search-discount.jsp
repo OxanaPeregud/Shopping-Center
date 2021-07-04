@@ -24,10 +24,8 @@
         <th><input type="reset" value="Reset" name="reset"/></th>
     </table>
 
-    <h2>${listShops}</h2>
-
     <p>
-        <a href="${pageContext.request.contextPath}/list-shops">Go back to full Shop list</a>
+        <a href="${pageContext.request.contextPath}/list-shops">Go to full Shop list</a>
     </p>
 
 </form>
