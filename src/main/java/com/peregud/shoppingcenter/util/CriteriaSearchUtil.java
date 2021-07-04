@@ -26,7 +26,9 @@ public class CriteriaSearchUtil {
         List<Shop> resultList = query.getResultList();
         String[] result = new String[resultList.size()];
         for (int i = 0; i < resultList.size(); i++) {
-            result[i] = String.valueOf(resultList.get(i));
+            result[i] = "Shop name: " + resultList.get(i).getName() + ", Discount: " +
+                    resultList.get(i).getDiscount() + "%, Shop Location: " +
+                    resultList.get(i).getLocation();
         }
         entityManager.close();
         return result;
@@ -47,7 +49,9 @@ public class CriteriaSearchUtil {
         List<Shop> resultList = query.getResultList();
         String[] result = new String[resultList.size()];
         for (int i = 0; i < resultList.size(); i++) {
-            result[i] = String.valueOf(resultList.get(i));
+            result[i] = "Shop name: " + resultList.get(i).getName() + ", Discount: " +
+                    resultList.get(i).getDiscount() + "%, Shop Location: " +
+                    resultList.get(i).getLocation();
         }
         entityManager.close();
         return result;
