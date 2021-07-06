@@ -1,7 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
-<html>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
+
+<html lang="${sessionScope.lang}">
 
 <head>
     <title>Shopping Center</title>
@@ -15,11 +20,21 @@
 </div>
 
 <div>
+    <h1><fmt:message key="label.app"/></h1>
+    <h2>
+        <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="view/search-discount.jsp"><fmt:message key="label.searchDiscount"/></a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="display-shops"><fmt:message key="label.searchActualDiscount"/></a>
+    </h2>
+</div>
+
+<div>
     <form action="display-shops" method="post">
         <table>
             <caption><h2>List of Shops</h2></caption>
             <tr>
-                <th>ID</th>
                 <th>Shop Name</th>
                 <th>Discount</th>
                 <th>Shop Location</th>
@@ -43,5 +58,10 @@
     </form>
 
 </div>
+
+<footer>
+    <a href="admin-login">Access database information</a>
+</footer>
+
 </body>
 </html>

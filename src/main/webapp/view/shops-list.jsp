@@ -21,12 +21,6 @@
         <a href="new-shop"><fmt:message key="label.newShop"/></a>
         &nbsp;&nbsp;&nbsp;
         <a href="list-shops"><fmt:message key="label.allShops"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="view/search-discount.jsp"><fmt:message key="label.searchDiscount"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-shops"><fmt:message key="label.searchActualDiscount"/></a>
     </h2>
 </div>
 

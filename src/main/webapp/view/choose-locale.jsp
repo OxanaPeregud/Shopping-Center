@@ -21,7 +21,7 @@
 </ul>
 <c:if test="${not empty param.sessionLocale}">
     <fmt:message key="label.sessionChangeSuccess"/>
-    <button><a href="${pageContext.request.contextPath}/list-shops"><fmt:message key="label.startApp"/></a></button>
+    <button><a href="${pageContext.request.contextPath}/display-all-shops"><fmt:message key="label.startApp"/></a></button>
 </c:if>
 
 </body>
