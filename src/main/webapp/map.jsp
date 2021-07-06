@@ -25,7 +25,6 @@
     });</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"
             type="text/javascript"></script>
-    <
     <script type="text/javascript">!function (o, c) {
         var n = c.documentElement, t = " w-mod-";
         n.className += t + "js",
@@ -74,7 +73,7 @@
              class="nav-menu w-nav-menu"><a href="${pageContext.request.contextPath}/display-all-shops"
                                             class="nav-link w-nav-link">Shops</a>
 
-            <a href="/contact" class="nav-link w-nav-link">Contact Us</a></nav>
+            <a href="${pageContext.request.contextPath}/contact" class="nav-link w-nav-link">Contact Us</a></nav>
 
         <div class="menu-button w-nav-button">
             <div class="menu-text">MENU</div>
@@ -148,5 +147,6 @@
         crossorigin="anonymous"></script>
 <script src="https://assets.website-files.com/5fd037f32f38988415755fe4/js/burnsville-mall.b474a1e20.js"
         type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script>
 </body>
 </html>
