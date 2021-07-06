@@ -49,6 +49,7 @@ public class CriteriaSearchUtil {
         List<ShopDto> shopDtoList = new ArrayList<>();
         resultList.forEach(shop -> {
             ShopDto shopDto = new ShopDto();
+            shopDto.setId(shop.getId());
             shopDto.setName(shop.getName());
             shopDto.setDiscount(shop.getDiscount());
             shopDto.setLocation(shop.getLocation());

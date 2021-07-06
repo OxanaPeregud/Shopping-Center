@@ -15,16 +15,17 @@ public class SearchActualDiscountUtil {
         return (List<?>)
                 HibernateUtil.createEntityManager()
                         .createQuery(
-                                "SELECT name, discount, location FROM Shop WHERE discountEndDate > :localDate")
+                                "SELECT id, name, discount, location FROM Shop WHERE discountEndDate > :localDate")
                         .setParameter("localDate", LocalDate.now())
                         .unwrap(Query.class)
                         .setResultTransformer(
                                 (ListResultTransformer)
                                         (tuples, aliases) -> {
                                             ShopDto shopDto = new ShopDto();
-                                            shopDto.setName((String) tuples[0]);
-                                            shopDto.setDiscount((Integer) tuples[1]);
-                                            shopDto.setLocation((String) tuples[2]);
+                                            shopDto.setId((Integer) tuples[0]);
+                                            shopDto.setName((String) tuples[1]);
+                                            shopDto.setDiscount((Integer) tuples[2]);
+                                            shopDto.setLocation((String) tuples[3]);
                                             return shopDto;
                                         }
                         )
