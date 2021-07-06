@@ -5,7 +5,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -23,10 +22,7 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("view/login-operations.jsp").include(request, response);
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        if (password.equals("1234")) {
-            out.print("Hello, " + name);
-            HttpSession session = request.getSession();
-            session.setAttribute("name", name);
+        if (name.equals("admin") && password.equals("1234")) {
             response.sendRedirect(request.getContextPath() + "/list-shops");
         } else {
             out.print("Incorrect username or password!");

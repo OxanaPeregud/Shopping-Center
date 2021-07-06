@@ -9,13 +9,13 @@
 
     Name:
     <label>
-        <input type="text" name="name">
+        <input type="text" name="name" required>
     </label>
     <br>
 
     Password:
     <label>
-        <input type="password" name="password">
+        <input type="password" name="password" required>
     </label>
     <br>
 
