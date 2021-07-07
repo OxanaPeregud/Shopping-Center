@@ -15,6 +15,8 @@
 
 <body>
 
+<%@include file="login-operations.jsp"%>
+
 <div>
     <h1><fmt:message key="label.app"/></h1>
     <h2>
