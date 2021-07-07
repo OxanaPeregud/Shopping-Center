@@ -10,7 +10,7 @@
 
 <head>
     <title><fmt:message key="label.contactForm"/></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/contact-form.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/contact.css">
 </head>
 
 <body>

@@ -9,18 +9,19 @@
 <html lang="${sessionScope.lang}">
 
 <head>
-    <title>Shopping Center</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/list-style.css">
+    <title><fmt:message key="label.mall"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/display-table-style.css">
 </head>
 
 <body>
 
-<div>
-    <h1>Shopping Center App</h1>
-</div>
+<button type="button" class="button"><a class="homepage" href="map"><fmt:message key="label.back"/></a></button>
 
 <div>
     <h1><fmt:message key="label.app"/></h1>
+</div>
+
+<div>
     <h2>
         <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
         &nbsp;&nbsp;&nbsp;
@@ -32,12 +33,13 @@
 
 <div>
     <form action="display-searched-shops" method="post">
-        <table>
-            <caption><h2>List of Shops</h2></caption>
+        <table id="customers">
+            <caption><h2><fmt:message key="label.allShops"/></h2></caption>
             <tr>
-                <th>Shop Name</th>
-                <th>Discount</th>
-                <th>Shop Location</th>
+                <th><fmt:message key="label.shopName"/></th>
+                <th><fmt:message key="label.discount"/></th>
+                <th><fmt:message key="label.location"/></th>
+                <th><fmt:message key="label.info"/></th>
             </tr>
 
             <c:forEach var="shop" items="${listShops}">
@@ -49,7 +51,7 @@
                     <td><c:out value="${shop.discount}"/></td>
                     <td><c:out value="${shop.location}"/></td>
                     <td>
-                        <a href="info-shop?id=<c:out value='${shop.id}' />">Show full Information About the Shop</a>
+                        <a href="info-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.fullShopInfo"/></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -60,7 +62,7 @@
 </div>
 
 <footer>
-    <a href="admin-login">Access database information</a>
+    <a href="admin-login"><fmt:message key="label.dbAccess"/></a>
 </footer>
 
 </body>
