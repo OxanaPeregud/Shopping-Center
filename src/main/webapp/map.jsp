@@ -1,8 +1,16 @@
-<!DOCTYPE html>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
+
+<html lang="${sessionScope.lang}">
+
 <head>
     <meta charset="utf-8"/>
-    <title>Shopping Mall</title>
+    <title><fmt:message key="label.mall"/></title>
     <meta content="Mall Map"/>
     <meta content="Lowerevel.png"/>
     <meta content="summary_large_image"/>
@@ -71,9 +79,10 @@
         <nav role="navigation"
 
              class="nav-menu w-nav-menu"><a href="${pageContext.request.contextPath}/display-all-shops"
-                                            class="nav-link w-nav-link">Shops</a>
+                                            class="nav-link w-nav-link"><fmt:message key="label.shops"/></a>
 
-            <a href="${pageContext.request.contextPath}/contact" class="nav-link w-nav-link">Contact Us</a></nav>
+            <a href="${pageContext.request.contextPath}/contact" class="nav-link w-nav-link">
+                <fmt:message key="label.contact"/></a></nav>
 
         <div class="menu-button w-nav-button">
             <div class="menu-text">MENU</div>
@@ -81,7 +90,7 @@
         </div>
     </div>
 </div>
-<h1 class="page-heading">Mall Map</h1>
+<h1 class="page-heading"><fmt:message key="label.map"/></h1>
 <div class="map_flexbox"><a href="#" class="map_lightbox w-inline-block w-lightbox">
     <img src="lower-level.png"
          alt="Map of the store locations in the mall" class="map_image"/>

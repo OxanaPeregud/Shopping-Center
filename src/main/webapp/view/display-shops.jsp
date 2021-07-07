@@ -26,12 +26,12 @@
         &nbsp;&nbsp;&nbsp;
         <a href="view/search-discount.jsp"><fmt:message key="label.searchDiscount"/></a>
         &nbsp;&nbsp;&nbsp;
-        <a href="display-shops"><fmt:message key="label.searchActualDiscount"/></a>
+        <a href="display-searched-shops"><fmt:message key="label.searchActualDiscount"/></a>
     </h2>
 </div>
 
 <div>
-    <form action="display-shops" method="post">
+    <form action="display-searched-shops" method="post">
         <table>
             <caption><h2>List of Shops</h2></caption>
             <tr>

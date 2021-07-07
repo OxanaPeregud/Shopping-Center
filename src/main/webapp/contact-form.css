@@ -70,3 +70,12 @@ input[type=submit]:hover {
 .center {
     text-align: center;
 }
+
+a:link {
+    color: #4682B4;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

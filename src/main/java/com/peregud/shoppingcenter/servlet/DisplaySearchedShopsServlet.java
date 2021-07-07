@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/display-shops")
-public class DisplayShopsServlet extends HttpServlet {
+@WebServlet("/display-searched-shops")
+public class DisplaySearchedShopsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
