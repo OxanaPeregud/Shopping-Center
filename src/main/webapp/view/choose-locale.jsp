@@ -10,19 +10,29 @@
 
 <head>
     <title>Locale</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/locale.css">
 </head>
 <body>
-<h2>
+<h1>
     <fmt:message key="label.chooseSessionLocale"/>
-</h2>
-<ul>
-    <li><a href="?sessionLocale=en"><fmt:message key="label.lang.en"/></a></li>
-    <li><a href="?sessionLocale=ru"><fmt:message key="label.lang.ru"/></a></li>
-</ul>
+</h1>
+
+<div class="container">
+<button type="button" class="button" style="vertical-align:middle"><a href="?sessionLocale=en"><fmt:message key="label.lang.en"/></a>
+</button>
+<button type="button" class="button" style="vertical-align:middle"><a href="?sessionLocale=ru"><fmt:message key="label.lang.ru"/></a>
+</button>
+</div>
+
+<br>
+<br>
+
+<h2>
 <c:if test="${not empty param.sessionLocale}">
     <fmt:message key="label.sessionChangeSuccess"/>
-    <button><a href="${pageContext.request.contextPath}/map"><fmt:message key="label.startApp"/></a></button>
+    <button type="button" class="button1"><a href="${pageContext.request.contextPath}/map"><fmt:message key="label.startApp"/></a></button>
 </c:if>
+</h2>
 
 </body>
 </html>
