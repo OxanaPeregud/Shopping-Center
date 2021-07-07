@@ -1,31 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
+
+<html lang="${sessionScope.lang}">
+
 <head>
-    <title>Search Shop</title>
+    <title><fmt:message key="label.search"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/search.css">
 </head>
+
 <body>
 
 <form name="search" action="${pageContext.request.contextPath}/search-shop" method="POST">
 
     <div>
-        <h3>Searching shop</h3>
+        <h3><fmt:message key="label.search"/></h3>
     </div>
 
-    <table>
+    <table class="center">
         <tr>
-            <td>Enter your request:</td>
+            <td><fmt:message key="label.enter"/>:</td>
             <td>
                 <label>
                     <input type="text" name="search"/>
                 </label>
             </td>
         </tr>
-        <th><input type="submit" value="Find" name="find"/></th>
-        <th><input type="reset" value="Reset" name="reset"/></th>
     </table>
 
+    <div>
+        <th><input type="submit" value="<fmt:message key="label.find"/>" name="find" class="button1"/></th>
+        &nbsp;
+        <th><input type="reset" value="<fmt:message key="label.reset"/>" name="reset" class="button1"/></th>
+    </div>
+
     <p>
-        <a href="${pageContext.request.contextPath}/list-shops">Go to full Shop list</a>
+        <a href="${pageContext.request.contextPath}/display-all-shops"><fmt:message key="label.allShops"/></a>
     </p>
 
 </form>

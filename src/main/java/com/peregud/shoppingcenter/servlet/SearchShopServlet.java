@@ -23,7 +23,6 @@ public class SearchShopServlet extends HttpServlet {
         String search = request.getParameter("search");
         List<?> listShops = CriteriaSearchUtil.shopKeywords(search);
         request.setAttribute("listShops", listShops);
-        request.getRequestDispatcher("view/search-shop.jsp").include(request, response);
-        request.getRequestDispatcher("view/display-shops.jsp").include(request, response);
+        request.getRequestDispatcher("view/display-shops.jsp").forward(request, response);
     }
 }
