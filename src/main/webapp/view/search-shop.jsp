@@ -10,7 +10,7 @@
 
 <head>
     <title><fmt:message key="label.search"/></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/search.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/search-style.css">
 </head>
 
 <body>
@@ -33,9 +33,8 @@
     </table>
 
     <div>
-        <th><input type="submit" value="<fmt:message key="label.find"/>" name="find" class="button1"/></th>
-        &nbsp;
-        <th><input type="reset" value="<fmt:message key="label.reset"/>" name="reset" class="button1"/></th>
+        <input type="submit" value="<fmt:message key="label.find"/>" name="find" class="button1"/>
+        <input type="reset" value="<fmt:message key="label.reset"/>" name="reset" class="button2"/>
     </div>
 
     <p>

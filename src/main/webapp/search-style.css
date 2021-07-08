@@ -61,7 +61,24 @@ table tr td:nth-child(2) {
     transition: all 0.5s;
     cursor: pointer;
     width: 20%;
-    margin-left: 180px;
+    margin-left: 300px;
+
+}
+
+.button2 {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #4682B4;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    transition: all 0.5s;
+    cursor: pointer;
+    width: 20%;
+    margin-right: 90px;
+    margin-top: 10px;
+    float: right;
 }
 
 a:link {

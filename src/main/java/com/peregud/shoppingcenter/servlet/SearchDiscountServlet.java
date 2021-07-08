@@ -23,7 +23,6 @@ public class SearchDiscountServlet extends HttpServlet {
         int minimumDiscount = Integer.parseInt(request.getParameter("minimumDiscount"));
         List<?> listShops = CriteriaSearchUtil.minimumDiscount(minimumDiscount);
         request.setAttribute("listShops", listShops);
-        request.getRequestDispatcher("view/search-discount.jsp").include(request, response);
-        request.getRequestDispatcher("view/display-shops.jsp").include(request, response);
+        request.getRequestDispatcher("view/display-shops.jsp").forward(request, response);
     }
 }
