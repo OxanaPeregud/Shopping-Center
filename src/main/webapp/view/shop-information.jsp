@@ -9,8 +9,8 @@
 <html lang="${sessionScope.lang}">
 
 <head>
-    <title>Full Shop Information</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/form-style.css">
+    <title><fmt:message key="label.fullShopInfo"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/info.css">
 </head>
 
 <body>
@@ -19,65 +19,81 @@
     <c:if test="${shop != null}">
         <input type="hidden" name="id" value="<c:out value='${shop.id}' />"/>
     </c:if>
-
-    <div class="row">
-        <label>Shop Name</label>
-        <label>
-            <c:out value='${shop.name}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Shop Description</label>
-        <label>
-            <c:out value='${shop.description}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Discount</label>
-        <label>
-            <c:out value='${shop.discount}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Discount Start Date</label>
-        <label>
-            <c:out value='${shop.discountStartDate}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Discount End Date</label>
-        <label>
-            <c:out value='${shop.discountEndDate}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Location</label>
-        <label>
-            <c:out value='${shop.location}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Email Address</label>
-        <label>
-            <c:out value='${shop.email}'/>
-        </label>
-    </div>
-
-    <div class="row">
-        <label>Mobile Number</label>
-        <label>
-            <c:out value='${shop.mobile}'/>
-        </label>
-    </div>
-
-    <a href="javascript:history.back()">Go Back</a>
-
 </div>
+
+<table>
+    <tr>
+        <td>
+            <div id="bloc1">
+
+                <div class="row">
+                    <h4><fmt:message key="label.shopName"/></h4>
+                    <label>
+                        <c:out value='${shop.name}'/>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <h4><fmt:message key="label.discount"/></h4>
+                    <label>
+                        <c:out value='${shop.discount}'/>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <h4><fmt:message key="label.discountStartDate"/></h4>
+                    <label>
+                        <c:out value='${shop.discountStartDate}'/>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <h4><fmt:message key="label.discountEndDate"/></h4>
+                    <label>
+                        <c:out value='${shop.discountEndDate}'/>
+                    </label>
+                </div>
+            </div>
+
+        </td>
+        <td>
+            <div id="bloc2">
+
+                <div class="row">
+                    <h4><fmt:message key="label.shopDescription"/></h4>
+                    <label>
+                        <c:out value='${shop.description}'/>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <h4><fmt:message key="label.location"/></h4>
+                    <label>
+                        <c:out value='${shop.location}'/>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <h4><fmt:message key="label.email"/></h4>
+                    <label>
+                        <c:out value='${shop.email}'/>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <h4><fmt:message key="label.mobile"/></h4>
+                    <label>
+                        <c:out value='${shop.mobile}'/>
+                    </label>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div class="link">
+    <a href="javascript:history.back()"><fmt:message key="label.goBack"/></a>
+</div>
+
 </body>
 </html>
