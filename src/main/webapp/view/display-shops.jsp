@@ -10,7 +10,7 @@
 
 <head>
     <title><fmt:message key="label.mall"/></title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/display-table-style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/table.css">
 </head>
 
 <body>

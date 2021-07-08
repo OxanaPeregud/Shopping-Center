@@ -15,7 +15,7 @@ public class SearchActualDiscountUtil {
         return (List<?>)
                 HibernateUtil.createEntityManager()
                         .createQuery(
-                                "SELECT id, name, discount, location FROM Shop WHERE discountEndDate > :localDate")
+                                "SELECT id, name, discount, location FROM Shop WHERE discountEndDate >= :localDate")
                         .setParameter("localDate", LocalDate.now())
                         .unwrap(Query.class)
                         .setResultTransformer(

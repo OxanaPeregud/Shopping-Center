@@ -9,12 +9,15 @@
 <html lang="${sessionScope.lang}">
 
 <head>
-    <title>Shop Information Form</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/form-style.css">
+    <title><fmt:message key="label.shopForm"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/form.css">
     <script src="view/validation.js"></script>
 </head>
 
 <body>
+
+<button type="button" class="button"><a class="homepage" href="list-shops"><fmt:message key="label.allShops"/></a>
+</button>
 
 <div>
     <c:if test="${shop != null}">
@@ -29,14 +32,11 @@
 
             <caption>
                 <h2>
-                    <a href="list-shops">List of All shops</a>
-                    <br>
-                    <br>
                     <c:if test="${shop != null}">
-                        Edit Shop Information
+                        <fmt:message key="label.infoShop"/>
                     </c:if>
                     <c:if test="${shop == null}">
-                        Add New Shop Information
+                        <fmt:message key="label.infoShop"/>
                     </c:if>
                 </h2>
             </caption>
@@ -46,7 +46,7 @@
             </c:if>
 
             <div class="row">
-                <label>Shop Name</label>
+                <label><fmt:message key="label.shopName"/></label>
                 <label>
                     <input type="text" name="name" maxlength="255"
                            value="<c:out value='${shop.name}' />"
@@ -56,7 +56,7 @@
             </div>
 
             <div class="row">
-                <label>Shop Description</label>
+                <label><fmt:message key="label.shopDescription"/></label>
                 <label>
                     <input type="text" name="description" maxlength="255"
                            value="<c:out value='${shop.description}' />"
@@ -66,7 +66,7 @@
             </div>
 
             <div class="row">
-                <label>Discount</label>
+                <label><fmt:message key="label.discount"/></label>
                 <label>
                     <input type="text" name="discount" maxlength="2"
                            value="<c:out value='${shop.discount}' />"
@@ -76,7 +76,7 @@
             </div>
 
             <div class="row">
-                <label>Discount Start Date</label>
+                <label><fmt:message key="label.discountStartDate"/></label>
                 <label>
                     <input type="date" name="discountStartDate" required pattern="\d{4}-\d{2}-\d{2}"
                            value="<c:out value='${shop.discountStartDate}' />"
@@ -86,7 +86,7 @@
             </div>
 
             <div class="row">
-                <label>Discount End Date</label>
+                <label><fmt:message key="label.discountEndDate"/></label>
                 <label>
                     <input type="date" name="discountEndDate" required pattern="\d{4}-\d{2}-\d{2}"
                            value="<c:out value='${shop.discountEndDate}' />"
@@ -96,7 +96,7 @@
             </div>
 
             <div class="row">
-                <label>Location</label>
+                <label><fmt:message key="label.location"/></label>
                 <label>
                     <input type="text" name="location" maxlength="255"
                            value="<c:out value='${shop.location}' />"
@@ -106,7 +106,7 @@
             </div>
 
             <div class="row">
-                <label>Email Address</label>
+                <label><fmt:message key="label.email"/></label>
                 <label>
                     <input type="text" name="email"
                            value="<c:out value='${shop.email}' />"
@@ -116,7 +116,7 @@
             </div>
 
             <div class="row">
-                <label>Mobile Number</label>
+                <label><fmt:message key="label.mobile"/></label>
                 <label>
                     <input type="text" name="mobile" maxlength="12"
                            value="<c:out value='${shop.mobile}' />"
@@ -126,7 +126,7 @@
             </div>
 
             <div class="row">
-                <input type="submit" value="Submit">
+                <input type="submit" value="<fmt:message key="label.submit"/>">
             </div>
 
         </form>

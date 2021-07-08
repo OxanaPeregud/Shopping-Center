@@ -9,16 +9,20 @@
 <html lang="${sessionScope.lang}">
 
 <head>
-    <title>Shopping Center</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/list-style.css">
+    <title><fmt:message key="label.mall"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/table.css">
 </head>
 
 <body>
 
-<%@include file="login-operations.jsp"%>
+<%@include file="login-operations.jsp" %>
+<button type="button" class="button"><a class="homepage" href="map"><fmt:message key="label.back"/></a></button>
 
 <div>
     <h1><fmt:message key="label.app"/></h1>
+</div>
+
+<div>
     <h2>
         <a href="new-shop"><fmt:message key="label.newShop"/></a>
         &nbsp;&nbsp;&nbsp;
@@ -28,7 +32,7 @@
 
 <div>
     <form action="list-shops" method="post">
-        <table>
+        <table id="customers">
             <caption><h2><fmt:message key="label.allShops"/></h2></caption>
             <tr>
                 <th>ID</th>
@@ -64,7 +68,7 @@
 
             <tr class="right">
                 <td>
-                    <input type="submit" value="Submit"/>
+                    <input type="submit" value="<fmt:message key="label.delete"/>"/>
                 </td>
             </tr>
 

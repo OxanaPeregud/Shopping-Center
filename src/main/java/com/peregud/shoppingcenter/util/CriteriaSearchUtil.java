@@ -24,7 +24,7 @@ public class CriteriaSearchUtil {
         CriteriaQuery<Shop> criteriaQuery = criteriaBuilder.createQuery(Shop.class);
         Root<Shop> root = criteriaQuery.from(Shop.class);
         criteriaQuery.select(root)
-                .where(criteriaBuilder.gt(root.get(Shop_.discount), minimumDiscount));
+                .where(criteriaBuilder.gt(root.get(Shop_.discount), minimumDiscount - 1));
         return getShopList(entityManager, criteriaQuery);
     }
 
