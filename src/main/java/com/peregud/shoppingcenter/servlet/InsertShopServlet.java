@@ -17,7 +17,7 @@ public class InsertShopServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        Shop shop = (Shop) ConverterImpl.getConverter(Shop.class).convert(request);
+        Shop shop = ConverterImpl.convert(Shop.class, request);
         servletShopService.save(shop);
         response.sendRedirect(request.getContextPath() + "/list-shops");
     }
