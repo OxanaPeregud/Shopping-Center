@@ -32,26 +32,26 @@
 </div>
 
 <div>
-    <form action="display-all-shops" method="post">
+    <form action="display-all-discounts" method="post">
         <table id="customers">
-            <caption><h2><fmt:message key="label.shops"/></h2></caption>
+            <caption><h2><fmt:message key="label.discounts"/></h2></caption>
             <tr>
-                <th><fmt:message key="label.shopName"/></th>
-                <th><fmt:message key="label.shopDescription"/></th>
-                <th><fmt:message key="label.location"/></th>
+                <th><fmt:message key="label.discount"/></th>
+                <th><fmt:message key="label.discountStartDate"/></th>
+                <th><fmt:message key="label.discountEndDate"/></th>
                 <th><fmt:message key="label.info"/></th>
             </tr>
 
-            <c:forEach var="shop" items="${listShops}">
+            <c:forEach var="discount" items="${listDiscounts}">
                 <tr>
-                    <c:if test="${shop != null}">
-                        <input type="hidden" name="id" value="<c:out value='${shop.id}' />"/>
+                    <c:if test="${discount != null}">
+                        <input type="hidden" name="id" value="<c:out value='${discount.id}' />"/>
                     </c:if>
-                    <td><c:out value="${shop.name}"/></td>
-                    <td><c:out value="${shop.description}"/></td>
-                    <td><c:out value="${shop.location}"/></td>
+                    <td><c:out value="${discount.discount}"/></td>
+                    <td><c:out value="${discount.discountStartDate}"/></td>
+                    <td><c:out value="${discount.discountEndDate}"/></td>
                     <td>
-                        <a href="info-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.fullShopInfo"/></a>
+                        <a href="info-discount?id=<c:out value='${discount.id}' />"><fmt:message key="label.fullDiscountInfo"/></a>
                     </td>
                 </tr>
             </c:forEach>

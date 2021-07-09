@@ -9,15 +9,15 @@
 <html lang="${sessionScope.lang}">
 
 <head>
-    <title><fmt:message key="label.fullShopInfo"/></title>
+    <title><fmt:message key="label.fullDiscountInfo"/></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/info.css">
 </head>
 
 <body>
 
 <div>
-    <c:if test="${shop != null}">
-        <input type="hidden" name="id" value="<c:out value='${shop.id}' />"/>
+    <c:if test="${discount != null}">
+        <input type="hidden" name="id" value="<c:out value='${discount.id}' />"/>
     </c:if>
 </div>
 
@@ -27,17 +27,17 @@
             <div id="bloc1">
 
                 <div class="row">
-                    <h4><fmt:message key="label.shopName"/></h4>
+                    <h4><fmt:message key="label.discount"/></h4>
                     <label>
-                        <c:out value='${shop.name}'/>
+                        <c:out value='${discount.discount}'/>
                     </label>
                 </div>
 
 
                 <div class="row">
-                    <h4><fmt:message key="label.shopDescription"/></h4>
+                    <h4><fmt:message key="label.discountStartDate"/></h4>
                     <label>
-                        <c:out value='${shop.description}'/>
+                        <c:out value='${discount.discountStartDate}'/>
                     </label>
                 </div>
         </td>
@@ -45,25 +45,12 @@
         <td>
             <div id="bloc2">
                 <div class="row">
-                    <h4><fmt:message key="label.location"/></h4>
+                    <h4><fmt:message key="label.discountEndDate"/></h4>
                     <label>
-                        <c:out value='${shop.location}'/>
+                        <c:out value='${discount.discountEndDate}'/>
                     </label>
                 </div>
 
-                <div class="row">
-                    <h4><fmt:message key="label.email"/></h4>
-                    <label>
-                        <c:out value='${shop.email}'/>
-                    </label>
-                </div>
-
-                <div class="row">
-                    <h4><fmt:message key="label.mobile"/></h4>
-                    <label>
-                        <c:out value='${shop.mobile}'/>
-                    </label>
-                </div>
             </div>
         </td>
     </tr>

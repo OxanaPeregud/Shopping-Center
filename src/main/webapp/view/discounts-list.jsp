@@ -24,38 +24,36 @@
 
 <div>
     <h2>
-        <a href="new-shop"><fmt:message key="label.newShop"/></a>
+        <a href="new-discount"><fmt:message key="label.newDiscount"/></a>
         &nbsp;&nbsp;&nbsp;
-        <a href="list-shops"><fmt:message key="label.allShops"/></a>
+        <a href="list-discounts"><fmt:message key="label.allDiscounts"/></a>
     </h2>
 </div>
 
 <div>
-    <form action="list-shops" method="post">
+    <form action="list-discounts" method="post">
         <table id="customers">
-            <caption><h2><fmt:message key="label.allShops"/></h2></caption>
+            <caption><h2><fmt:message key="label.allDiscounts"/></h2></caption>
             <tr>
                 <th>ID</th>
-                <th><fmt:message key="label.shopName"/></th>
-                <th><fmt:message key="label.shopDescription"/></th>
-                <th><fmt:message key="label.location"/></th>
-                <th><fmt:message key="label.mobile"/></th>
-                <th><fmt:message key="label.email"/></th>
+                <th><fmt:message key="label.discount"/></th>
+                <th><fmt:message key="label.discountStartDate"/></th>
+                <th><fmt:message key="label.discountEndDate"/></th>
+                <th><fmt:message key="label.shop"/></th>
             </tr>
 
-            <c:forEach var="shop" items="${listShops}">
+            <c:forEach var="discount" items="${listDiscounts}">
                 <tr>
-                    <td><c:out value="${shop.id}"/></td>
-                    <td><c:out value="${shop.name}"/></td>
-                    <td><c:out value="${shop.description}"/></td>
-                    <td><c:out value="${shop.location}"/></td>
-                    <td><c:out value="${shop.mobile}"/></td>
-                    <td><c:out value="${shop.email}"/></td>
+                    <td><c:out value="${discount.id}"/></td>
+                    <td><c:out value="${discount.discount}"/></td>
+                    <td><c:out value="${discount.discountStartDate}"/></td>
+                    <td><c:out value="${discount.discountEndDate}"/></td>
+                    <td><c:out value="${discount.shop}"/></td>
                     <td>
-                        <a href="edit-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.edit"/></a>
+                        <a href="edit-discount?id=<c:out value='${discount.id}' />"><fmt:message key="label.edit"/></a>
                         &nbsp;&nbsp;&nbsp;&nbsp
-                        <label><input type="checkbox" name="deleteShop"
-                                      value="${shop.id}"><fmt:message key="label.delete"/></label>
+                        <label><input type="checkbox" name="deleteDiscount"
+                                      value="${discount.id}"><fmt:message key="label.delete"/></label>
                     </td>
                 </tr>
             </c:forEach>

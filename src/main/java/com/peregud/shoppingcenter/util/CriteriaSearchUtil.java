@@ -1,9 +1,8 @@
 package com.peregud.shoppingcenter.util;
 
+import com.peregud.shoppingcenter.dto.ShopDto;
 import com.peregud.shoppingcenter.model.Shop;
 import com.peregud.shoppingcenter.model.Shop_;
-import com.peregud.shoppingcenter.dto.ShopDto;
-import com.sun.istack.NotNull;
 import lombok.experimental.UtilityClass;
 
 import javax.persistence.EntityManager;
@@ -18,32 +17,17 @@ import java.util.List;
 @UtilityClass
 public class CriteriaSearchUtil {
 
-    public List<ShopDto> minimumDiscount(int minimumDiscount) {
-        EntityManager entityManager = HibernateUtil.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Shop> criteriaQuery = criteriaBuilder.createQuery(Shop.class);
-        Root<Shop> root = criteriaQuery.from(Shop.class);
-        criteriaQuery.select(root)
-                .where(criteriaBuilder.gt(root.get(Shop_.discount), minimumDiscount - 1));
-        return getShopList(entityManager, criteriaQuery);
-    }
-
     public List<ShopDto> shopKeywords(String search) {
         EntityManager entityManager = HibernateUtil.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Shop> criteriaQuery = criteriaBuilder.createQuery(Shop.class);
         Root<Shop> root = criteriaQuery.from(Shop.class);
         Predicate predicate1 = criteriaBuilder
-                .like(criteriaBuilder.lower(root.get(Shop_.name)), "%" + search.toLowerCase() + "%");
+                .like(criteriaBuilder.upper(root.get(Shop_.name)), "%" + search.toUpperCase() + "%");
         Predicate predicate2 = criteriaBuilder
-                .like(criteriaBuilder.lower(root.get(Shop_.description)), "%" + search.toLowerCase() + "%");
+                .like(criteriaBuilder.upper(root.get(Shop_.description)), "%" + search.toUpperCase() + "%");
         criteriaQuery.select(root)
                 .where(criteriaBuilder.or(predicate1, predicate2));
-        return getShopList(entityManager, criteriaQuery);
-    }
-
-    @NotNull
-    private static List<ShopDto> getShopList(EntityManager entityManager, CriteriaQuery<Shop> criteriaQuery) {
         TypedQuery<Shop> query = entityManager.createQuery(criteriaQuery);
         List<Shop> resultList = query.getResultList();
         List<ShopDto> shopDtoList = new ArrayList<>();
@@ -51,7 +35,7 @@ public class CriteriaSearchUtil {
             ShopDto shopDto = new ShopDto();
             shopDto.setId(shop.getId());
             shopDto.setName(shop.getName());
-            shopDto.setDiscount(shop.getDiscount());
+            shopDto.setDescription(shop.getDescription());
             shopDto.setLocation(shop.getLocation());
             shopDtoList.add(shopDto);
         });

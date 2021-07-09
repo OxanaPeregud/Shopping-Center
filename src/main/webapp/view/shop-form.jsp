@@ -11,7 +11,7 @@
 <head>
     <title><fmt:message key="label.shopForm"/></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/form.css">
-    <script src="view/validation.js"></script>
+    <script src="view/validation-shop.js"></script>
 </head>
 
 <body>
@@ -31,14 +31,7 @@
             </c:if>
 
             <caption>
-                <h2>
-                    <c:if test="${shop != null}">
-                        <fmt:message key="label.infoShop"/>
-                    </c:if>
-                    <c:if test="${shop == null}">
-                        <fmt:message key="label.infoShop"/>
-                    </c:if>
-                </h2>
+                <h2><fmt:message key="label.infoShop"/></h2>
             </caption>
 
             <c:if test="${shop != null}">
@@ -63,36 +56,6 @@
                     />
                 </label>
                 <div class="error" id="descriptionErr"></div>
-            </div>
-
-            <div class="row">
-                <label><fmt:message key="label.discount"/></label>
-                <label>
-                    <input type="text" name="discount" maxlength="2"
-                           value="<c:out value='${shop.discount}' />"
-                    />
-                </label>
-                <div class="error" id="discountErr"></div>
-            </div>
-
-            <div class="row">
-                <label><fmt:message key="label.discountStartDate"/></label>
-                <label>
-                    <input type="date" name="discountStartDate" required pattern="\d{4}-\d{2}-\d{2}"
-                           value="<c:out value='${shop.discountStartDate}' />"
-                    />
-                    <span class="validity"></span>
-                </label>
-            </div>
-
-            <div class="row">
-                <label><fmt:message key="label.discountEndDate"/></label>
-                <label>
-                    <input type="date" name="discountEndDate" required pattern="\d{4}-\d{2}-\d{2}"
-                           value="<c:out value='${shop.discountEndDate}' />"
-                    />
-                    <span class="validity"></span>
-                </label>
             </div>
 
             <div class="row">

@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,15 +28,6 @@ public class Shop implements Serializable {
     private String description;
 
     @Column
-    private Integer discount;
-
-    @Column(name = "discount_start_date")
-    private LocalDate discountStartDate;
-
-    @Column(name = "discount_end_date")
-    private LocalDate discountEndDate;
-
-    @Column
     private String location;
 
     @Column
@@ -43,4 +35,12 @@ public class Shop implements Serializable {
 
     @Column
     private Long mobile;
+
+    @OneToMany(mappedBy = "shop")
+    private Set<Discount> discount = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -6,6 +6,6 @@ import lombok.Data;
 public class ShopDto {
     private Integer id;
     private String name;
-    private Integer discount;
+    private String description;
     private String location;
 }
