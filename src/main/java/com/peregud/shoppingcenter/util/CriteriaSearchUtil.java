@@ -1,6 +1,9 @@
 package com.peregud.shoppingcenter.util;
 
+import com.peregud.shoppingcenter.dto.DiscountDto;
 import com.peregud.shoppingcenter.dto.ShopDto;
+import com.peregud.shoppingcenter.model.Discount;
+import com.peregud.shoppingcenter.model.Discount_;
 import com.peregud.shoppingcenter.model.Shop;
 import com.peregud.shoppingcenter.model.Shop_;
 import lombok.experimental.UtilityClass;
@@ -41,5 +44,27 @@ public class CriteriaSearchUtil {
         });
         entityManager.close();
         return shopDtoList;
+    }
+
+    public List<DiscountDto> minimumDiscount(int minimumDiscount) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Discount> criteriaQuery = criteriaBuilder.createQuery(Discount.class);
+        Root<Discount> root = criteriaQuery.from(Discount.class);
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.gt(root.get(Discount_.discount), minimumDiscount - 1));
+        TypedQuery<Discount> query = entityManager.createQuery(criteriaQuery);
+        List<Discount> resultList = query.getResultList();
+        List<DiscountDto> discountDtoList = new ArrayList<>();
+        resultList.forEach(discount -> {
+            DiscountDto discountDto = new DiscountDto();
+            discountDto.setId(discount.getId());
+            discountDto.setDiscount(discount.getDiscount());
+            discountDto.setDiscountStartDate(discount.getDiscountStartDate());
+            discountDto.setDiscountEndDate(discount.getDiscountEndDate());
+            discountDtoList.add(discountDto);
+        });
+        entityManager.close();
+        return discountDtoList;
     }
 }
