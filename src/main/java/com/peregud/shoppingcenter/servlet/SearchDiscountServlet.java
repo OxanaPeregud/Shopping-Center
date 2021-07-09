@@ -22,6 +22,7 @@ public class SearchDiscountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int minimumDiscount = Integer.parseInt(request.getParameter("minimumDiscount"));
         List<?> listDiscounts = CriteriaSearchUtil.minimumDiscount(minimumDiscount);
+        request.setAttribute("minimumDiscount", minimumDiscount);
         request.setAttribute("listDiscounts", listDiscounts);
         request.getRequestDispatcher("view/display-discounts.jsp").forward(request, response);
     }

@@ -1,11 +1,9 @@
 package com.peregud.shoppingcenter.util;
 
 import com.peregud.shoppingcenter.dto.DiscountDto;
+import com.peregud.shoppingcenter.dto.DiscountStatisticsDto;
 import com.peregud.shoppingcenter.dto.ShopDto;
-import com.peregud.shoppingcenter.model.Discount;
-import com.peregud.shoppingcenter.model.Discount_;
-import com.peregud.shoppingcenter.model.Shop;
-import com.peregud.shoppingcenter.model.Shop_;
+import com.peregud.shoppingcenter.model.*;
 import lombok.experimental.UtilityClass;
 
 import javax.persistence.EntityManager;
@@ -66,5 +64,26 @@ public class CriteriaSearchUtil {
         });
         entityManager.close();
         return discountDtoList;
+    }
+
+    public List<?> discountStatistics() {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = criteriaBuilder.createQuery(Object[].class);
+        Root<DiscountStatistics> discountStatisticsRoot = query.from(DiscountStatistics.class);
+        query.groupBy(discountStatisticsRoot.get(DiscountStatistics_.discount));
+        query.multiselect(discountStatisticsRoot.get(DiscountStatistics_.discount),
+                criteriaBuilder.count(discountStatisticsRoot));
+        TypedQuery<Object[]> typedQuery = entityManager.createQuery(query);
+        List<Object[]> resultList = typedQuery.getResultList();
+        List<DiscountStatisticsDto> discountStatisticsDtoList = new ArrayList<>();
+        resultList.forEach(objects -> {
+            DiscountStatisticsDto discountStatisticsDto = new DiscountStatisticsDto();
+            discountStatisticsDto.setDiscount((String) objects[0]);
+            discountStatisticsDto.setCount((Long) objects[1]);
+            discountStatisticsDtoList.add(discountStatisticsDto);
+        });
+        entityManager.close();
+        return discountStatisticsDtoList;
     }
 }
