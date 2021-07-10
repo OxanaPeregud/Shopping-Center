@@ -20,7 +20,7 @@ public class ShopDiscountsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         Shop shop = servletShopService.getById(id);
-        List<?> listDiscountShops = CriteriaSearchUtil.joinTablesShops(id);
+        List<?> listDiscountShops = CriteriaSearchUtil.joinTablesShopDiscounts(id);
         request.setAttribute("shop", shop);
         request.setAttribute("listDiscountShops", listDiscountShops);
         servletShopService.set(id);

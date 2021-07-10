@@ -5,12 +5,14 @@ import com.peregud.shoppingcenter.dto.DiscountStatisticsDto;
 import com.peregud.shoppingcenter.dto.ShopDiscountDto;
 import com.peregud.shoppingcenter.dto.ShopDto;
 import com.peregud.shoppingcenter.model.*;
+import com.sun.istack.NotNull;
 import lombok.experimental.UtilityClass;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,9 @@ public class CriteriaSearchUtil {
         CriteriaQuery<Shop> criteriaQuery = criteriaBuilder.createQuery(Shop.class);
         Root<Shop> root = criteriaQuery.from(Shop.class);
         Predicate predicate1 = criteriaBuilder
-                .like(criteriaBuilder.lower(root.get(Shop_.name)), "%" + search.toLowerCase() + "%");
+                .like(criteriaBuilder.lower(root.get(Shop_.NAME)), "%" + search.toLowerCase() + "%");
         Predicate predicate2 = criteriaBuilder
-                .like(criteriaBuilder.lower(root.get(Shop_.description)), "%" + search.toLowerCase() + "%");
+                .like(criteriaBuilder.lower(root.get(Shop_.DESCRIPTION)), "%" + search.toLowerCase() + "%");
         criteriaQuery.select(root)
                 .where(criteriaBuilder.or(predicate1, predicate2));
         TypedQuery<Shop> query = entityManager.createQuery(criteriaQuery);
@@ -49,7 +51,7 @@ public class CriteriaSearchUtil {
         CriteriaQuery<Discount> criteriaQuery = criteriaBuilder.createQuery(Discount.class);
         Root<Discount> root = criteriaQuery.from(Discount.class);
         criteriaQuery.select(root)
-                .where(criteriaBuilder.gt(root.get(Discount_.discount), minimumDiscount - 1));
+                .where(criteriaBuilder.gt(root.get(Discount_.DISCOUNT), minimumDiscount - 1));
         TypedQuery<Discount> query = entityManager.createQuery(criteriaQuery);
         List<Discount> resultList = query.getResultList();
         List<DiscountDto> discountDtoList = new ArrayList<>();
@@ -70,8 +72,8 @@ public class CriteriaSearchUtil {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = criteriaBuilder.createQuery(Object[].class);
         Root<DiscountStatistics> discountStatisticsRoot = query.from(DiscountStatistics.class);
-        query.groupBy(discountStatisticsRoot.get(DiscountStatistics_.discount));
-        query.multiselect(discountStatisticsRoot.get(DiscountStatistics_.discount),
+        query.groupBy(discountStatisticsRoot.get(DiscountStatistics_.DISCOUNT));
+        query.multiselect(discountStatisticsRoot.get(DiscountStatistics_.DISCOUNT),
                 criteriaBuilder.count(discountStatisticsRoot));
         TypedQuery<Object[]> typedQuery = entityManager.createQuery(query);
         List<Object[]> resultList = typedQuery.getResultList();
@@ -86,38 +88,14 @@ public class CriteriaSearchUtil {
         return discountStatisticsDtoList;
     }
 
-    public List<?> joinTables(int minimumDiscount) {
-        EntityManager entityManager = HibernateUtil.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
-        Root<Discount> root = criteriaQuery.from(Discount.class);
-        Join<Discount, Shop> join = root.join(Discount_.shop, JoinType.LEFT);
-        criteriaQuery.multiselect(root, join);
-        criteriaQuery.where(criteriaBuilder.gt(root.get(Discount_.discount), minimumDiscount - 1));
-        TypedQuery<Tuple> query = entityManager.createQuery(criteriaQuery);
-        List<Tuple> shopDiscount = query.getResultList();
-        List<ShopDiscountDto> shopDiscountDtoList = new ArrayList<>();
-        shopDiscount.forEach(tuple -> {
-            ShopDiscountDto shopDiscountDto = new ShopDiscountDto();
-            shopDiscountDto.setName(((Shop) tuple.get(1)).getName());
-            shopDiscountDto.setLocation(((Shop) tuple.get(1)).getLocation());
-            shopDiscountDto.setDiscount(((Discount) tuple.get(0)).getDiscount());
-            shopDiscountDto.setDiscountStartDate(((Discount) tuple.get(0)).getDiscountStartDate());
-            shopDiscountDto.setDiscountEndDate(((Discount) tuple.get(0)).getDiscountEndDate());
-            shopDiscountDtoList.add(shopDiscountDto);
-        });
-        entityManager.close();
-        return shopDiscountDtoList;
-    }
-
-    public List<?> joinTablesShops(Integer id) {
+    public List<?> joinTablesShopDiscounts(Integer id) {
         EntityManager entityManager = HibernateUtil.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
         Root<Shop> root = criteriaQuery.from(Shop.class);
-        Join<Shop, Discount> join = root.join(Shop_.discount, JoinType.LEFT);
+        Join<Shop, Discount> join = root.join(Shop_.DISCOUNT, JoinType.LEFT);
         criteriaQuery.multiselect(root, join);
-        criteriaQuery.where(criteriaBuilder.equal(root.get(Shop_.id), id));
+        criteriaQuery.where(criteriaBuilder.equal(root.get(Shop_.ID), id));
         TypedQuery<Tuple> query = entityManager.createQuery(criteriaQuery);
         List<Tuple> shopDiscount = query.getResultList();
         List<ShopDiscountDto> shopDiscountDtoList = new ArrayList<>();
@@ -128,6 +106,46 @@ public class CriteriaSearchUtil {
             shopDiscountDto.setDiscount(((Discount) tuple.get(1)).getDiscount());
             shopDiscountDto.setDiscountStartDate(((Discount) tuple.get(1)).getDiscountStartDate());
             shopDiscountDto.setDiscountEndDate(((Discount) tuple.get(1)).getDiscountEndDate());
+            shopDiscountDtoList.add(shopDiscountDto);
+        });
+        entityManager.close();
+        return shopDiscountDtoList;
+    }
+
+    public List<?> joinTablesMinimumDiscount(int minimumDiscount) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
+        Root<Discount> root = criteriaQuery.from(Discount.class);
+        Join<Discount, Shop> join = root.join(Discount_.SHOP, JoinType.LEFT);
+        criteriaQuery.multiselect(root, join);
+        criteriaQuery.where(criteriaBuilder.gt(root.get(Discount_.DISCOUNT), minimumDiscount - 1));
+        return getObjects(entityManager, criteriaQuery);
+    }
+
+    public List<?> joinTablesActualDiscounts() {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
+        Root<Discount> root = criteriaQuery.from(Discount.class);
+        Join<Discount, Shop> join = root.join(Discount_.SHOP, JoinType.LEFT);
+        criteriaQuery.multiselect(root, join);
+        criteriaQuery.where(criteriaBuilder.greaterThan(root.get(Discount_.DISCOUNT_END_DATE), LocalDate.now()));
+        return getObjects(entityManager, criteriaQuery);
+    }
+
+    @NotNull
+    private static List<?> getObjects(EntityManager entityManager, CriteriaQuery<Tuple> criteriaQuery) {
+        TypedQuery<Tuple> query = entityManager.createQuery(criteriaQuery);
+        List<Tuple> shopDiscount = query.getResultList();
+        List<ShopDiscountDto> shopDiscountDtoList = new ArrayList<>();
+        shopDiscount.forEach(tuple -> {
+            ShopDiscountDto shopDiscountDto = new ShopDiscountDto();
+            shopDiscountDto.setName(((Shop) tuple.get(1)).getName());
+            shopDiscountDto.setLocation(((Shop) tuple.get(1)).getLocation());
+            shopDiscountDto.setDiscount(((Discount) tuple.get(0)).getDiscount());
+            shopDiscountDto.setDiscountStartDate(((Discount) tuple.get(0)).getDiscountStartDate());
+            shopDiscountDto.setDiscountEndDate(((Discount) tuple.get(0)).getDiscountEndDate());
             shopDiscountDtoList.add(shopDiscountDto);
         });
         entityManager.close();
