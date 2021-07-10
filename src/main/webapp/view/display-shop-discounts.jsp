@@ -11,6 +11,7 @@
 <head>
     <title><fmt:message key="label.mall"/></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/table.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/link-style.css">
 </head>
 
 <body>
@@ -21,15 +22,7 @@
     <h1><fmt:message key="label.app"/></h1>
 </div>
 
-<div>
-    <h2>
-        <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-all-shops"><fmt:message key="label.allShops"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-all-discounts"><fmt:message key="label.allDiscounts"/></a>
-    </h2>
-</div>
+<%@include file="dropdown-client.jsp" %>
 
 <div>
 
@@ -50,6 +43,10 @@
 
         </c:forEach>
     </table>
+</div>
+
+<div class="link">
+    <a href="javascript:history.back()"><fmt:message key="label.goBack"/></a>
 </div>
 
 <footer>

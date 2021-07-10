@@ -17,18 +17,10 @@
 
 <button type="button" class="button"><a class="homepage" href="map"><fmt:message key="label.back"/></a></button>
 
-<div>
-    <h1><fmt:message key="label.app"/></h1>
-</div>
+<%@include file="dropdown-client.jsp" %>
 
 <div>
-    <h2>
-        <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-all-shops"><fmt:message key="label.allShops"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-all-discounts"><fmt:message key="label.allDiscounts"/></a>
-    </h2>
+    <h1><fmt:message key="label.app"/></h1>
 </div>
 
 <div>
@@ -55,7 +47,8 @@
                         <a href="info-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.fullShopInfo"/></a>
                     </td>
                     <td>
-                        <a href="shop-discounts?id=<c:out value='${shop.id}' />"><fmt:message key="label.shopDiscounts"/></a>
+                        <a href="shop-discounts?id=<c:out value='${shop.id}' />"><fmt:message
+                                key="label.shopDiscounts"/></a>
                     </td>
                 </tr>
             </c:forEach>

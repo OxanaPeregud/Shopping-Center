@@ -12,6 +12,7 @@
     <title>Locale</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/locale.css">
 </head>
+
 <body>
 <h1>
     <fmt:message key="label.chooseSessionLocale"/>

@@ -22,13 +22,7 @@
     <h1><fmt:message key="label.app"/></h1>
 </div>
 
-<div>
-    <h2>
-        <a href="new-shop"><fmt:message key="label.newShop"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="list-shops"><fmt:message key="label.allShops"/></a>
-    </h2>
-</div>
+<%@include file="dropdown-db.jsp" %>
 
 <div>
     <form action="list-shops" method="post">
@@ -41,6 +35,8 @@
                 <th><fmt:message key="label.location"/></th>
                 <th><fmt:message key="label.mobile"/></th>
                 <th><fmt:message key="label.email"/></th>
+                <th><fmt:message key="label.info"/></th>
+                <th><fmt:message key="label.info"/></th>
             </tr>
 
             <c:forEach var="shop" items="${listShops}">
@@ -53,7 +49,8 @@
                     <td><c:out value="${shop.email}"/></td>
                     <td>
                         <a href="edit-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.edit"/></a>
-                        &nbsp;&nbsp;&nbsp;&nbsp
+                    </td>
+                    <td>
                         <label><input type="checkbox" name="deleteShop"
                                       value="${shop.id}"><fmt:message key="label.delete"/></label>
                     </td>

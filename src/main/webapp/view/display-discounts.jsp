@@ -21,15 +21,7 @@
     <h1><fmt:message key="label.app"/></h1>
 </div>
 
-<div>
-    <h2>
-        <a href="view/search-shop.jsp"><fmt:message key="label.searchShop"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-all-shops"><fmt:message key="label.allShops"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="display-all-discounts"><fmt:message key="label.allDiscounts"/></a>
-    </h2>
-</div>
+<%@include file="dropdown-client.jsp" %>
 
 <div>
     <form action="display-all-discounts" method="post">
@@ -51,7 +43,8 @@
                     <td><c:out value="${discount.discountStartDate}"/></td>
                     <td><c:out value="${discount.discountEndDate}"/></td>
                     <td>
-                        <a href="info-discount?id=<c:out value='${discount.id}' />"><fmt:message key="label.fullDiscountInfo"/></a>
+                        <a href="info-discount?id=<c:out value='${discount.id}' />"><fmt:message
+                                key="label.fullDiscountInfo"/></a>
                     </td>
                 </tr>
             </c:forEach>

@@ -8,7 +8,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"/list-shops", "/insert-shop", "/new-shop",
-        "/update-shop", "/delete-shop"})
+        "/update-shop", "/delete-shop", "/list-discounts", "/insert-discount", "/new-discount",
+        "/update-discount", "/delete-discount"})
 public class AuthFilter implements Filter {
 
     @Override

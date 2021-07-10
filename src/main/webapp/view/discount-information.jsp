@@ -33,7 +33,6 @@
                     </label>
                 </div>
 
-
                 <div class="row">
                     <h4><fmt:message key="label.discountStartDate"/></h4>
                     <label>

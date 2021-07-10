@@ -22,13 +22,7 @@
     <h1><fmt:message key="label.app"/></h1>
 </div>
 
-<div>
-    <h2>
-        <a href="new-discount"><fmt:message key="label.newDiscount"/></a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="list-discounts"><fmt:message key="label.allDiscounts"/></a>
-    </h2>
-</div>
+<%@include file="dropdown-db.jsp" %>
 
 <div>
     <form action="list-discounts" method="post">
@@ -40,6 +34,8 @@
                 <th><fmt:message key="label.discountStartDate"/></th>
                 <th><fmt:message key="label.discountEndDate"/></th>
                 <th><fmt:message key="label.shop"/></th>
+                <th><fmt:message key="label.info"/></th>
+                <th><fmt:message key="label.info"/></th>
             </tr>
 
             <c:forEach var="discount" items="${listDiscounts}">
@@ -51,7 +47,8 @@
                     <td><c:out value="${discount.shop}"/></td>
                     <td>
                         <a href="edit-discount?id=<c:out value='${discount.id}' />"><fmt:message key="label.edit"/></a>
-                        &nbsp;&nbsp;&nbsp;&nbsp
+                    </td>
+                    <td>
                         <label><input type="checkbox" name="deleteDiscount"
                                       value="${discount.id}"><fmt:message key="label.delete"/></label>
                     </td>
