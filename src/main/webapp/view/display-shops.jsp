@@ -40,6 +40,7 @@
                 <th><fmt:message key="label.shopDescription"/></th>
                 <th><fmt:message key="label.location"/></th>
                 <th><fmt:message key="label.info"/></th>
+                <th><fmt:message key="label.info"/></th>
             </tr>
 
             <c:forEach var="shop" items="${listShops}">
@@ -52,6 +53,9 @@
                     <td><c:out value="${shop.location}"/></td>
                     <td>
                         <a href="info-shop?id=<c:out value='${shop.id}' />"><fmt:message key="label.fullShopInfo"/></a>
+                    </td>
+                    <td>
+                        <a href="shop-discounts?id=<c:out value='${shop.id}' />"><fmt:message key="label.shopDiscounts"/></a>
                     </td>
                 </tr>
             </c:forEach>

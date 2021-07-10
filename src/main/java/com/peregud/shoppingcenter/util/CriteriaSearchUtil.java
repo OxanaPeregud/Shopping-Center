@@ -110,15 +110,14 @@ public class CriteriaSearchUtil {
         return shopDiscountDtoList;
     }
 
-    public List<?> joinTables(String shop) {
+    public List<?> joinTablesShops(Integer id) {
         EntityManager entityManager = HibernateUtil.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
         Root<Shop> root = criteriaQuery.from(Shop.class);
         Join<Shop, Discount> join = root.join(Shop_.discount, JoinType.LEFT);
         criteriaQuery.multiselect(root, join);
-        criteriaQuery.where(criteriaBuilder
-                .like(criteriaBuilder.lower(root.get(Shop_.name)), "%" + shop.toLowerCase() + "%"));
+        criteriaQuery.where(criteriaBuilder.equal(root.get(Shop_.id), id));
         TypedQuery<Tuple> query = entityManager.createQuery(criteriaQuery);
         List<Tuple> shopDiscount = query.getResultList();
         List<ShopDiscountDto> shopDiscountDtoList = new ArrayList<>();

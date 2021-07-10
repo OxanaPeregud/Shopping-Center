@@ -1,12 +1,14 @@
 package com.peregud.shoppingcenter.service;
 
-import com.peregud.shoppingcenter.model.Discount;
 import com.peregud.shoppingcenter.model.Shop;
+import com.peregud.shoppingcenter.util.HibernateUtil;
 
+import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class ServletShopService extends ServletService<Shop> {
+    private final ServletDiscountService servletDiscountService = new ServletDiscountService();
 
     public Shop save(Shop shop) {
         return super.save(shop);
@@ -28,7 +30,27 @@ public class ServletShopService extends ServletService<Shop> {
         super.deleteList(Shop.class, idList);
     }
 
-    public void set(int id, Set<Discount> set) {
-        getById(id).setDiscount(set);
+    @SuppressWarnings("unchecked")
+    public void set(int id) {
+        getById(id).setDiscount(servletDiscountService.getSet((List<Integer>) selectIdForSet(id)));
+    }
+
+    public List<?> selectIdForSet(int id) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        Shop shop = getById(id);
+        List<?> list = new ArrayList<>();
+        try {
+            entityManager.getTransaction().begin();
+            list = entityManager.createQuery("SELECT id FROM Discount WHERE shop = :shop")
+                    .setParameter("shop", shop)
+                    .getResultList();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            entityManager.close();
+        }
+        return list;
     }
 }

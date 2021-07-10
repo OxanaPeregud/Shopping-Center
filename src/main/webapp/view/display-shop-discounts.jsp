@@ -32,30 +32,24 @@
 </div>
 
 <div>
-    <form action="display-all-discounts" method="post">
-        <table id="customers">
-            <caption><h2><fmt:message key="label.discounts"/></h2></caption>
+
+    <table id="customers">
+        <caption><h2><fmt:message key="label.discounts"/></h2></caption>
+        <tr>
+            <th><fmt:message key="label.discount"/></th>
+            <th><fmt:message key="label.discountStartDate"/></th>
+            <th><fmt:message key="label.discountEndDate"/></th>
+        </tr>
+
+        <c:forEach var="discount" items="${listDiscountShops}">
             <tr>
-                <th><fmt:message key="label.shopName"/></th>
-                <th><fmt:message key="label.location"/></th>
-                <th><fmt:message key="label.discount"/></th>
-                <th><fmt:message key="label.discountStartDate"/></th>
-                <th><fmt:message key="label.discountEndDate"/></th>
+                <td><c:out value="${discount.discount}"/></td>
+                <td><c:out value="${discount.discountStartDate}"/></td>
+                <td><c:out value="${discount.discountEndDate}"/></td>
             </tr>
 
-            <c:forEach var="shop" items="${listDiscountShops}">
-                <tr>
-                    <td><c:out value="${shop.name}"/></td>
-                    <td><c:out value="${shop.location}"/></td>
-                    <td><c:out value="${shop.discount}"/></td>
-                    <td><c:out value="${shop.discountStartDate}"/></td>
-                    <td><c:out value="${shop.discountEndDate}"/></td>
-                </tr>
-            </c:forEach>
-
-        </table>
-    </form>
-
+        </c:forEach>
+    </table>
 </div>
 
 <footer>
