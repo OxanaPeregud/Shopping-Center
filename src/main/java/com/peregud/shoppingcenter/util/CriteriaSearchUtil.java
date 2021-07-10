@@ -2,18 +2,15 @@ package com.peregud.shoppingcenter.util;
 
 import com.peregud.shoppingcenter.dto.DiscountDto;
 import com.peregud.shoppingcenter.dto.DiscountStatisticsDto;
+import com.peregud.shoppingcenter.dto.ShopDiscountDto;
 import com.peregud.shoppingcenter.dto.ShopDto;
 import com.peregud.shoppingcenter.model.*;
 import lombok.experimental.UtilityClass;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Projections;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,5 +84,29 @@ public class CriteriaSearchUtil {
         });
         entityManager.close();
         return discountStatisticsDtoList;
+    }
+
+    public List<?> joinTables(int minimumDiscount) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
+        Root<Discount> root = criteriaQuery.from(Discount.class);
+        Join<Discount, Shop> join = root.join(Discount_.shop, JoinType.LEFT);
+        criteriaQuery.multiselect(root, join);
+        criteriaQuery.where(criteriaBuilder.gt(root.get(Discount_.discount), minimumDiscount - 1));
+        TypedQuery<Tuple> query = entityManager.createQuery(criteriaQuery);
+        List<Tuple> shopDiscount = query.getResultList();
+        List<ShopDiscountDto> shopDiscountDtoList = new ArrayList<>();
+        shopDiscount.forEach(tuple -> {
+            ShopDiscountDto shopDiscountDto = new ShopDiscountDto();
+            shopDiscountDto.setName(((Shop) tuple.get(1)).getName());
+            shopDiscountDto.setLocation(((Shop) tuple.get(1)).getLocation());
+            shopDiscountDto.setDiscount(((Discount) tuple.get(0)).getDiscount());
+            shopDiscountDto.setDiscountStartDate(((Discount) tuple.get(0)).getDiscountStartDate());
+            shopDiscountDto.setDiscountEndDate(((Discount) tuple.get(0)).getDiscountEndDate());
+            shopDiscountDtoList.add(shopDiscountDto);
+        });
+        entityManager.close();
+        return shopDiscountDtoList;
     }
 }
