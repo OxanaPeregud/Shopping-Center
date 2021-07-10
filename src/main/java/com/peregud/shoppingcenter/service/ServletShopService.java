@@ -1,8 +1,10 @@
 package com.peregud.shoppingcenter.service;
 
+import com.peregud.shoppingcenter.model.Discount;
 import com.peregud.shoppingcenter.model.Shop;
 
 import java.util.List;
+import java.util.Set;
 
 public class ServletShopService extends ServletService<Shop> {
 
@@ -24,5 +26,9 @@ public class ServletShopService extends ServletService<Shop> {
 
     public void deleteList(String[] idList) {
         super.deleteList(Shop.class, idList);
+    }
+
+    public void set(int id, Set<Discount> set) {
+        getById(id).setDiscount(set);
     }
 }

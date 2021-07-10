@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +35,9 @@ public class Shop implements Serializable {
 
     @Column
     private Long mobile;
+
+    @OneToMany(mappedBy = "shop")
+    private Set<Discount> discount = new HashSet<>();
 
     @Override
     public String toString() {

@@ -109,4 +109,29 @@ public class CriteriaSearchUtil {
         entityManager.close();
         return shopDiscountDtoList;
     }
+
+    public List<?> joinTables(String shop) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createTupleQuery();
+        Root<Shop> root = criteriaQuery.from(Shop.class);
+        Join<Shop, Discount> join = root.join(Shop_.discount, JoinType.LEFT);
+        criteriaQuery.multiselect(root, join);
+        criteriaQuery.where(criteriaBuilder
+                .like(criteriaBuilder.lower(root.get(Shop_.name)), "%" + shop.toLowerCase() + "%"));
+        TypedQuery<Tuple> query = entityManager.createQuery(criteriaQuery);
+        List<Tuple> shopDiscount = query.getResultList();
+        List<ShopDiscountDto> shopDiscountDtoList = new ArrayList<>();
+        shopDiscount.forEach(tuple -> {
+            ShopDiscountDto shopDiscountDto = new ShopDiscountDto();
+            shopDiscountDto.setName(((Shop) tuple.get(0)).getName());
+            shopDiscountDto.setLocation(((Shop) tuple.get(0)).getLocation());
+            shopDiscountDto.setDiscount(((Discount) tuple.get(1)).getDiscount());
+            shopDiscountDto.setDiscountStartDate(((Discount) tuple.get(1)).getDiscountStartDate());
+            shopDiscountDto.setDiscountEndDate(((Discount) tuple.get(1)).getDiscountEndDate());
+            shopDiscountDtoList.add(shopDiscountDto);
+        });
+        entityManager.close();
+        return shopDiscountDtoList;
+    }
 }
