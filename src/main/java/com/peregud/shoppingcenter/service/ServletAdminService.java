@@ -7,11 +7,11 @@ import javax.persistence.EntityManager;
 
 public class ServletAdminService extends ServletService<Admin> {
 
-    public String findAdmin(String name, String password) {
-        String result = "false";
+    public boolean findAdmin(String name, String password) {
         EntityManager entityManager = HibernateUtil.createEntityManager();
+        long result = 0;
         try {
-            result = (String) entityManager.createQuery("SELECT 'true' FROM Admin WHERE name = :name and " +
+            result = (Long) entityManager.createQuery("SELECT count(*) FROM Admin WHERE name = :name and " +
                     "password = :password")
                     .setParameter("name", name)
                     .setParameter("password", password)
@@ -22,6 +22,6 @@ public class ServletAdminService extends ServletService<Admin> {
         } finally {
             entityManager.close();
         }
-        return result;
+        return result > 0;
     }
 }

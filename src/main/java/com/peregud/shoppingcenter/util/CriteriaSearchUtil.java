@@ -5,6 +5,8 @@ import com.peregud.shoppingcenter.dto.DiscountStatisticsDto;
 import com.peregud.shoppingcenter.dto.ShopDto;
 import com.peregud.shoppingcenter.model.*;
 import lombok.experimental.UtilityClass;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -24,9 +26,9 @@ public class CriteriaSearchUtil {
         CriteriaQuery<Shop> criteriaQuery = criteriaBuilder.createQuery(Shop.class);
         Root<Shop> root = criteriaQuery.from(Shop.class);
         Predicate predicate1 = criteriaBuilder
-                .like(criteriaBuilder.upper(root.get(Shop_.name)), "%" + search.toUpperCase() + "%");
+                .like(criteriaBuilder.lower(root.get(Shop_.name)), "%" + search.toLowerCase() + "%");
         Predicate predicate2 = criteriaBuilder
-                .like(criteriaBuilder.upper(root.get(Shop_.description)), "%" + search.toUpperCase() + "%");
+                .like(criteriaBuilder.lower(root.get(Shop_.description)), "%" + search.toLowerCase() + "%");
         criteriaQuery.select(root)
                 .where(criteriaBuilder.or(predicate1, predicate2));
         TypedQuery<Shop> query = entityManager.createQuery(criteriaQuery);

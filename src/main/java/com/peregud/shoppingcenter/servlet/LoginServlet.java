@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        if (servletAdminService.findAdmin(name, password).equals("true")) {
+        if (servletAdminService.findAdmin(name, password)) {
             HttpSession session = request.getSession();
             session.setAttribute("name", name);
             response.sendRedirect(request.getContextPath() + "/list-shops");
