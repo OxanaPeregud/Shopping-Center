@@ -98,8 +98,8 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+            <version>1.4.195</version>
             <scope>test</scope>
-            <version>1.4.194</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -154,7 +154,6 @@
 
             <plugin>
                 <!--mvn package cargo:run-->
-                <!--Ctrl-C to stop-->
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.8.3</version>
@@ -177,6 +176,14 @@
                             </properties>
                         </deployable>
                     </deployables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
                 </configuration>
             </plugin>
 

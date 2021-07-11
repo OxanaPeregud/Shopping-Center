@@ -1,8 +1,6 @@
 package com.peregud.shoppingcenter.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +9,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Entity
+@Getter
+@EqualsAndHashCode
 @Table(name = "statistics")
 public class DiscountStatistics implements Serializable {
     @Id

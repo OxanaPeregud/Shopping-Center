@@ -1,10 +1,7 @@
 package com.peregud.shoppingcenter.service;
 
 import com.peregud.shoppingcenter.model.Shop;
-import com.peregud.shoppingcenter.util.HibernateUtil;
 
-import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServletShopService extends ServletService<Shop> {
@@ -31,26 +28,11 @@ public class ServletShopService extends ServletService<Shop> {
     }
 
     @SuppressWarnings("unchecked")
-    public void set(int id) {
-        getById(id).setDiscount(servletDiscountService.getSet((List<Integer>) selectIdForSet(id)));
+    public void set(Shop shop, int id) {
+        getById(id).setDiscount(servletDiscountService.getSet((List<Integer>) selectIdForSet(shop, id)));
     }
 
-    public List<?> selectIdForSet(int id) {
-        EntityManager entityManager = HibernateUtil.createEntityManager();
-        Shop shop = getById(id);
-        List<?> list = new ArrayList<>();
-        try {
-            entityManager.getTransaction().begin();
-            list = entityManager.createQuery("SELECT id FROM Discount WHERE shop = :shop")
-                    .setParameter("shop", shop)
-                    .getResultList();
-            entityManager.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            entityManager.getTransaction().rollback();
-        } finally {
-            entityManager.close();
-        }
-        return list;
+    public List<?> selectIdForSet(Shop shop, int id) {
+        return super.selectIdForSet(shop, id);
     }
 }

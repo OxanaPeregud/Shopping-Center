@@ -7,11 +7,12 @@ import javax.persistence.EntityManager;
 
 public class DiscountListenerService {
 
-    public void save(String discount) {
+    public DiscountStatistics save(String discount) {
         EntityManager entityManager = HibernateUtil.createEntityManager();
+        DiscountStatistics discountStatistics = null;
         try {
             entityManager.getTransaction().begin();
-            DiscountStatistics discountStatistics = DiscountStatistics.builder()
+            discountStatistics = DiscountStatistics.builder()
                     .discount(discount)
                     .build();
             entityManager.merge(discountStatistics);
@@ -22,5 +23,6 @@ public class DiscountListenerService {
         } finally {
             entityManager.close();
         }
+        return discountStatistics;
     }
 }

@@ -29,4 +29,8 @@ public class ServletService<T> extends AbstractDAO<T> {
             super.delete(clazz, Integer.parseInt(i));
         }
     }
+
+    public List<?> selectIdForSet(T t, int id) {
+        return super.selectIdForSet(t, id);
+    }
 }

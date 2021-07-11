@@ -70,4 +70,25 @@ public abstract class AbstractDAO<T> {
         }
         return list;
     }
+
+    @SuppressWarnings("unchecked")
+    public List<?> selectIdForSet(T t, int id) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
+        t = (T) entityManager.find(t.getClass(), id);
+        List<?> list = new ArrayList<>();
+        try {
+            entityManager.getTransaction().begin();
+            list = entityManager
+                    .createQuery("SELECT " + id + " FROM " + t.getClass().getName() + " WHERE " + t + " = :" + t)
+                    .setParameter("t", t)
+                    .getResultList();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        } finally {
+            entityManager.close();
+        }
+        return list;
+    }
 }

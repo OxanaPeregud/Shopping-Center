@@ -2,6 +2,7 @@ package com.peregud.shoppingcenter.converter;
 
 import com.peregud.shoppingcenter.model.Discount;
 import com.peregud.shoppingcenter.model.Shop;
+import lombok.Getter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public class ConverterImpl {
     private static final Map<Class<?>, Converter<?>> CONVERTER_MAP;
+    @Getter
     private static final Converter<Shop> SHOP_CONVERTER;
     private static final Converter<Discount> DISCOUNT_CONVERTER;
 
