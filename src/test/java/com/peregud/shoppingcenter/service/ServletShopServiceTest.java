@@ -1,5 +1,6 @@
 package com.peregud.shoppingcenter.service;
 
+import com.peregud.shoppingcenter.GenerateDataForH2;
 import com.peregud.shoppingcenter.model.Shop;
 import org.junit.jupiter.api.Test;
 
@@ -10,41 +11,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class ServletShopServiceTest {
+class ServletShopServiceTest extends GenerateDataForH2 {
     ServletShopService servletShopService = new ServletShopService();
-    Shop shop1 = Shop.builder()
-            .id(1)
-            .name("Shop1")
-            .build();
-    Shop shop2 = Shop.builder()
-            .id(2)
-            .name("Shop2")
-            .build();
-    Shop shop3 = Shop.builder()
-            .id(3)
-            .name("Shop3")
-            .build();
-
-    @Test
-    void save_success() {
-        assertEquals(shop1, servletShopService.save(shop1));
-    }
-
-    @Test
-    void save_fail() {
-        assertNotEquals(shop2, servletShopService.save(shop1));
-    }
 
     @Test
     void getById_success() {
-        servletShopService.save(shop1);
-        assertEquals(shop3, servletShopService.getById(Shop.class, shop3.getId()));
+        assertEquals(shop2, servletShopService.getById(Shop.class, 2));
     }
 
     @Test
     void getById_fail() {
-        servletShopService.save(shop1);
-        servletShopService.save(shop2);
         assertNotEquals(shop2, servletShopService.getById(Shop.class, shop1.getId()));
     }
 
@@ -68,15 +44,12 @@ class ServletShopServiceTest {
 
     @Test
     void delete_success() {
-        servletShopService.save(shop1);
         servletShopService.delete(Shop.class, shop1.getId());
         assertNull(servletShopService.getById(Shop.class, shop1.getId()));
     }
 
     @Test
     void delete_fail() {
-        servletShopService.save(shop1);
-        servletShopService.save(shop2);
         servletShopService.delete(Shop.class, shop1.getId());
         assertNotNull(servletShopService.getById(Shop.class, shop2.getId()));
     }
