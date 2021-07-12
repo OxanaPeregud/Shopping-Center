@@ -18,7 +18,7 @@ class DeleteShopServletTest {
         HttpServletResponse response = mock(HttpServletResponse.class);
         when(request.getParameter("id")).thenReturn("1");
         new DeleteShopServlet().doGet(request, response);
-        verify(request, atLeast(1)).getParameter("id");
         assertEquals("1", request.getParameter("id"));
+        verify(request, atLeast(1)).getParameter("id");
     }
 }
