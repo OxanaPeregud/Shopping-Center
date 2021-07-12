@@ -2,31 +2,27 @@ package com.peregud.shoppingcenter.servlet;
 
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-class DisplayAllDiscountsServletTest {
+class DisplayAllDiscountsServletTest extends MockInit {
 
     @Test
     void doGet() throws ServletException, IOException {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
-        List<?> listDiscounts = new ArrayList<>();
         when(request.getRequestDispatcher(any(String.class))).thenReturn(requestDispatcher);
-        new DisplayAllDiscountsServlet().doGet(request, response);
         assertEquals(requestDispatcher, request.getRequestDispatcher("view/display-discounts.jsp"));
+
+        new DisplayAllDiscountsServlet().doGet(request, response);
         verify(requestDispatcher).forward(request, response);
+
+        List<?> listDiscounts = new ArrayList<>();
         verify(request).setAttribute("listDiscounts", listDiscounts);
     }
 }
