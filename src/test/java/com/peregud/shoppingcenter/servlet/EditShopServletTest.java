@@ -6,25 +6,26 @@ import org.junit.jupiter.api.Test;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-class DisplayAllShopsServletTest extends MockInit {
+class EditShopServletTest extends MockInit {
     ServletService<Shop> servletShopService = new ServletService<>();
 
     @Test
     void doGet() throws ServletException, IOException {
         when(request.getRequestDispatcher(any(String.class))).thenReturn(requestDispatcher);
-        assertEquals(requestDispatcher, request.getRequestDispatcher("view/display-shops.jsp"));
+        assertEquals(requestDispatcher, request.getRequestDispatcher("view/shop-form.jsp"));
 
-        new DisplayAllShopsServlet().doGet(request, response);
-        verify(requestDispatcher).forward(request, response);
+        when(request.getParameter("id")).thenReturn("1");
+        assertEquals("1", request.getParameter("id"));
 
-        List<?> listShops = servletShopService.getList(Shop.class);
-        verify(request).setAttribute("listShops", listShops);
+        new EditShopServlet().doGet(request, response);
+        verify(request, atLeast(1)).getParameter("id");
+
+        Shop shop = servletShopService.getById(Shop.class, 1);
+        verify(request).setAttribute("shop", shop);
     }
 }
