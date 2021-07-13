@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("name", name);
             response.sendRedirect(request.getContextPath() + "/list-shops");
         } else {
-            out.print("Incorrect username or password!");
+            out.print("<h3 text-align: center;>Incorrect username or password!</h3>");
             request.getRequestDispatcher("view/admin-login.jsp").include(request, response);
         }
         out.close();

@@ -16,8 +16,8 @@
 
 <body>
 
-<button type="button" class="button"><a class="homepage" href="list-discounts"><fmt:message
-        key="label.allDiscounts"/></a>
+<button type="button" class="button"><a class="homepage" href="list-discounts">
+    <fmt:message key="label.allDiscounts"/></a>
 </button>
 
 <div>

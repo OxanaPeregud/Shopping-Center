@@ -79,7 +79,7 @@ function validateForm() {
             "Shop Description: " + description + "\n" +
             "Shop Location: " + location + "\n" +
             "Email Address: " + email + "\n" +
-            "Mobile Number: " + mobile + "\n";
+            "Mobile Number: " + mobile;
         alert(dataPreview);
     }
 }
