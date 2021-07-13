@@ -37,6 +37,8 @@
                 <th><fmt:message key="label.email"/></th>
                 <th><fmt:message key="label.info"/></th>
                 <th><fmt:message key="label.info"/></th>
+                <th><fmt:message key="label.info"/></th>
+                <th><fmt:message key="label.info"/></th>
             </tr>
 
             <c:forEach var="shop" items="${listShops}">
@@ -53,6 +55,13 @@
                     <td>
                         <label><input type="checkbox" name="deleteShop"
                                       value="${shop.id}"><fmt:message key="label.delete"/></label>
+                    </td>
+                    <td>
+                        <a href="set-discount?id=<c:out value='${shop.id}' />"><fmt:message key="label.newDiscount"/></a>
+                    </td>
+                    <td>
+                        <a href="shop-discounts?id=<c:out value='${shop.id}' />">
+                            <fmt:message key="label.shopDiscounts"/></a>
                     </td>
                 </tr>
             </c:forEach>
