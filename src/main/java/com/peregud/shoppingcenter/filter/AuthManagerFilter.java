@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/list-shops", "/insert-shop", "/new-shop",
-        "/update-shop", "/delete-shop", "/list-discounts", "/insert-discount", "/new-discount",
-        "/update-discount", "/delete-discount"})
-public class AuthFilter implements Filter {
+@WebFilter(filterName = "AuthManagerFilter", urlPatterns = {"/display-all-shops", "/display-all-discounts",
+        "/display-discount-statistics"})
+public class AuthManagerFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -19,7 +18,7 @@ public class AuthFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         String contextPath = req.getContextPath();
         HttpSession session = req.getSession();
-        if ((session != null) && (session.getAttribute("name") != null)) {
+        if ((session != null) && (session.getAttribute("manager") != null)) {
             chain.doFilter(request, response);
         } else {
             res.sendRedirect(contextPath + "/view/admin-login.jsp");

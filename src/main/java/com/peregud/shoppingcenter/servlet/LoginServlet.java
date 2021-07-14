@@ -28,7 +28,13 @@ public class LoginServlet extends HttpServlet {
         if (servletAdminService.findAdmin(name, password)) {
             HttpSession session = request.getSession();
             session.setAttribute("name", name);
-            response.sendRedirect(request.getContextPath() + "/list-shops");
+            if (request.getParameter("name").equals("admin")) {
+                session.setAttribute("admin", name);
+                response.sendRedirect(request.getContextPath() + "/list-shops");
+            } else if (request.getParameter("name").equals("manager")) {
+                session.setAttribute("manager", name);
+                response.sendRedirect(request.getContextPath() + "/display-all-shops");
+            }
         } else {
             out.print("<h3 text-align: center;>Incorrect username or password!</h3>");
             request.getRequestDispatcher("view/admin-login.jsp").include(request, response);

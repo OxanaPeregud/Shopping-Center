@@ -18,6 +18,9 @@ public class Admin implements Serializable {
     private Integer id;
 
     @Column
+    private String role;
+
+    @Column
     private String name;
 
     @Column
